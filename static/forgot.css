@@ -1,0 +1,112 @@
+.forgot-container {
+    width: 400px;
+    margin: 100px auto;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+}
+
+input,
+button {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2ecc71;
+}
+
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .forgot-container {
+        width: 380px;
+        margin: 80px auto;
+    }
+}
+
+/* Small tablets - 768px */
+@media (max-width: 768px) {
+    .forgot-container {
+        width: 90%;
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 22px;
+    }
+
+    input,
+    button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .back-button {
+        top: 16px;
+        right: 16px;
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile - 480px */
+@media (max-width: 480px) {
+    .forgot-container {
+        width: 94%;
+        margin: 80px auto 40px;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    input,
+    button {
+        padding: 12px;
+        font-size: 16px;
+        margin-top: 12px;
+    }
+
+    button {
+        border-radius: 8px;
+    }
+
+    .back-button {
+        top: 12px;
+        right: 12px;
+        padding: 6px 12px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+}

@@ -1,0 +1,55 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body with gradient and center alignment */
+body {
+    background: linear-gradient(135deg, #ae91db, #ab9c9c);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Centered success box */
+.success-box {
+    background-color: #e8e0e0;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.success-box h2 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #333;
+}
+
+.success-box p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+/* Back Button */
+.back-button {
+    font-size: 14px;
+    background-color: #7b2ff7;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #5e20c6;
+}

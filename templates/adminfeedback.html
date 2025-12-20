@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedbacks - HostelHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminfeedback.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-title">Feedback Submissions</div>
+        <a href="#" onclick="history.back()" class="nav-back">Back</a>
+    </nav>
+
+    <div class="container">
+        <h1>Feedback Submissions</h1>
+
+        <table id="feedbackTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Feedback</th>
+                    <th>Suggestion</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in feedbacks %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.feedback }}</td>
+                    <td>{{ item.suggestion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

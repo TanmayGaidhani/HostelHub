@@ -1,0 +1,305 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+    --primary: #2563eb;
+    --secondary: #3b82f6;
+
+    --bg-main: #eaf0ff;
+    --bg-card: #ffffff;
+
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+
+    --radius-lg: 18px;
+    --radius-md: 12px;
+
+    --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    background: var(--bg-main);
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+/* =========================
+   NAVBAR (MOBILE-FIRST)
+========================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    padding: 16px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 800;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    z-index: 1000;
+}
+
+.navbar-title {
+    white-space: nowrap;
+}
+
+/* Back button */
+.navbar-back {
+    background: #ffffff;
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* =========================
+   PROFILE CARD (MOBILE-FIRST)
+========================= */
+.profile-card {
+    width: calc(100% - 24px);
+    max-width: 520px;
+
+    margin: 88px auto 24px;   /* 🔥 compact top space */
+    padding: 24px 18px;
+
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+/* =========================
+   PROFILE IMAGE / ICON
+========================= */
+.profile-img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-icon {
+    font-size: 96px;
+    color: var(--primary);
+}
+
+/* =========================
+   TEXT
+========================= */
+.title {
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: 10px;
+}
+
+.username {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* =========================
+   EDIT BUTTON
+========================= */
+.edit-btn {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    padding: 8px 18px;
+    border-radius: var(--radius-md);
+
+    display: inline-block;
+    margin-top: 6px;
+
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+.section-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 16px 0 8px;
+}
+
+.info-label {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* =========================
+   HR
+========================= */
+hr {
+    border: none;
+    border-top: 1.5px solid #e5e7eb;
+    margin: 16px 0;
+}
+
+/* =========================
+   DESKTOP / TABLET
+========================= */
+@media (min-width: 768px) {
+
+    .navbar {
+        padding: 14px 36px;
+        font-size: 22px;
+    }
+
+    .navbar-back {
+        padding: 10px 24px;
+        font-size: 16px;
+    }
+
+    .profile-card {
+        max-width: 900px;
+        margin: 120px auto 40px;
+        padding: 42px;
+    }
+
+    .profile-img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .profile-icon {
+        font-size: 140px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+}
+/* =========================================
+   MOBILE NAVBAR HEIGHT INCREASE (FINAL)
+========================================= */
+@media (max-width: 768px) {
+
+    /* Increase navbar height clearly */
+    .navbar {
+        min-height: 96px;        /* ⬆ visible height */
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+
+    /* Keep content vertically centered */
+    .navbar-title {
+        line-height: 1.4;
+    }
+
+    .navbar-back {
+        padding: 10px 20px;     /* keep button balanced */
+    }
+
+    /* Push content down to avoid overlap */
+    .profile-card {
+        margin-top: 110px;
+    }
+}
+/* ==================================================
+   EXTRA LARGE MOBILE NAVBAR (VERY TALL)
+================================================== */
+@media (max-width: 768px) {
+
+    /* BIG APP-STYLE NAVBAR */
+    .navbar {
+        min-height: 140px;              /* 🔥 VERY TALL */
+        padding: 36px 22px;             /* 🔥 big top & bottom space */
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        font-size: 22px;
+    }
+
+    .navbar-title {
+        font-size: 22px;
+        line-height: 1.5;
+    }
+
+    .navbar-back {
+        padding: 14px 26px;
+        font-size: 17px;
+    }
+
+    /* PUSH CONTENT BELOW BIG NAVBAR */
+    .profile-card {
+        margin-top: 190px;              /* 🔥 IMPORTANT */
+        padding: 28px 20px;
+    }
+}
+
+/* ==================================================
+   VERY SMALL PHONES
+================================================== */
+@media (max-width: 480px) {
+
+    .navbar {
+        min-height: 160px;              /* 🔥 EVEN BIGGER */
+        padding: 42px 20px;
+    }
+
+    .profile-card {
+        margin-top: 210px;
+    }
+}
+/* =========================================
+   PROPER MOBILE NAVBAR HEIGHT (BALANCED)
+========================================= */
+@media (max-width: 768px) {
+
+    .navbar {
+        min-height: 88px;          /* ✔ proper increase (not too big) */
+        padding: 20px 22px;        /* ✔ balanced top-bottom spacing */
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar-title {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    .navbar-back {
+        padding: 10px 22px;
+        font-size: 15px;
+    }
+
+    /* Adjust content position only slightly */
+    .profile-card {
+        margin-top: 120px;
+    }
+}

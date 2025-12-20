@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts - HostelHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='admincontact.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="nav-title">📞 Contact Submissions</div>
+        <a href="#" onclick="history.back()" class="back-button">Back</a>
+    </nav>
+
+    <!-- ================= CONTENT ================= -->
+    <div class="container">
+        <h1>Contact Submissions</h1>
+
+        <table id="contactTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Query</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in contacts %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.number }}</td>
+                    <td>{{ item.query }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

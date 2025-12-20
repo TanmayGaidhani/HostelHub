@@ -1,0 +1,324 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* ================= BODY ================= */
+body {
+    background: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    min-height: 100vh;
+    padding-top: 110px;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    background: linear-gradient(90deg, #7b2ff7, #3c8dff);
+    padding: 18px 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+}
+
+.nav-title {
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* ================= BACK BUTTON ================= */
+.nav-back {
+    background: #ffffff;
+    color: #2563eb;
+
+    padding: 10px 22px;
+    border-radius: 999px;
+
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Disable hover effects */
+.nav-back:hover,
+.nav-back:focus,
+.nav-back:active {
+    background: #ffffff;
+    color: #2563eb;
+    transform: none;
+}
+
+/* ================= MAIN CONTAINER ================= */
+.container {
+    max-width: 620px;
+    width: 92%;
+    margin: 20px auto;
+
+    background: #ffffff;
+    padding: 34px 28px;
+    border-radius: 18px;
+
+    box-shadow: 0 12px 38px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= HEADING ================= */
+h2 {
+    text-align: center;
+    font-size: 26px;
+    color: #0f172a;
+    font-weight: 900;
+    margin-bottom: 26px;
+}
+
+/* ================= FORM ================= */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= TEXTAREA ================= */
+form textarea {
+    width: 100%;
+    height: 130px;
+    padding: 15px;
+
+    border-radius: 14px;
+    border: 1px solid #cbd5e1;
+
+    resize: none;
+    font-size: 16px;
+    color: #1e293b;
+    background: #f8faff;
+
+    transition: 0.25s;
+}
+
+form textarea:focus {
+    border-color: #7b2ff7;
+    box-shadow: 0 0 10px rgba(123, 47, 247, 0.35);
+    outline: none;
+}
+
+/* ================= SUBMIT BUTTON ================= */
+form button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 18px;
+
+    background: linear-gradient(90deg, #7b2ff7, #3c8dff);
+    color: white;
+
+    border: none;
+    border-radius: 14px;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+/* ================= SUCCESS NOTIFICATION ================= */
+.notification {
+    margin-top: 22px;
+    padding: 14px 18px;
+
+    background-color: #f4f0ff;
+    border-left: 6px solid #7b2ff7;
+
+    border-radius: 12px;
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* =================================================
+   MOBILE & SMALL SCREEN FIX (IMPORTANT)
+================================================= */
+@media (max-width: 600px) {
+
+    /* Reduce empty space above */
+    body {
+        padding-top: 95px;
+    }
+
+    /* Navbar compact but visible */
+    .navbar {
+        padding: 16px 18px;
+        font-size: 18px;
+    }
+
+    .nav-back {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    /* Card looks balanced */
+    .container {
+        width: 94%;
+        margin-top: 14px;
+        padding: 30px 22px;
+    }
+
+    h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    form textarea {
+        height: 120px;
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    form button {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .notification {
+        font-size: 15px;
+        padding: 12px 16px;
+    }
+}
+/* =================================================
+   FINAL SMALL SCREEN FIX (VERY IMPORTANT)
+================================================= */
+@media (max-width: 480px) {
+
+    /* NAVBAR – make it tall & app-like */
+    .navbar {
+        min-height: 88px;                 /* 🔥 proper height */
+        padding: 20px 16px;
+        font-size: 18px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-title {
+        font-size: 17px;
+        line-height: 1.4;
+    }
+
+    /* BACK BUTTON – finger friendly */
+    .nav-back {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+
+    /* BODY – push content correctly */
+    body {
+        padding-top: 110px;               /* 🔥 matches navbar height */
+    }
+
+    /* CONTAINER – center & balance */
+    .container {
+        width: 94%;
+        margin: 24px auto;                /* 🔥 removes top-floating look */
+        padding: 28px 20px;
+    }
+
+    /* HEADING */
+    h2 {
+        font-size: 21px;
+        margin-bottom: 18px;
+    }
+
+    /* TEXTAREA */
+    form textarea {
+        height: 120px;
+        font-size: 15px;
+    }
+
+    /* BUTTON */
+    form button {
+        font-size: 15px;
+        padding: 14px;
+    }
+}
+/* =========================
+   BOLD APP-STYLE NAVBAR
+========================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    background: linear-gradient(90deg, #7b2ff7, #5b7cfa);
+    min-height: 78px;                 /* 🔥 bold height */
+
+    padding: 18px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 20px;
+
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+
+    box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+    z-index: 1000;
+}
+
+/* TITLE */
+.nav-title {
+    font-size: 18px;
+    letter-spacing: 0.3px;
+}
+
+/* BACK BUTTON */
+.nav-back {
+    background: #ffffff;
+    color: #5b2df8;
+
+    padding: 10px 20px;
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* Disable hover jump */
+.nav-back:hover,
+.nav-back:active,
+.nav-back:focus {
+    background: #ffffff;
+    color: #5b2df8;
+    transform: none;
+}
+

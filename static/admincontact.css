@@ -1,0 +1,291 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+    --primary: #2563eb;
+    --secondary: #3b82f6;
+
+    --bg-main: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    --bg-card: #ffffff;
+
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+
+    --border-light: #e5e7eb;
+
+    --radius-lg: 18px;
+    --radius-md: 12px;
+
+    --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.18);
+    --shadow-strong: 0 14px 36px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    background: var(--bg-main);
+    min-height: 100vh;
+    padding-top: 110px;
+    color: var(--text-dark);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    padding: 14px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+
+    box-shadow: var(--shadow-soft);
+    z-index: 1000;
+}
+
+.nav-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* =========================
+   BACK BUTTON (NO HOVER)
+========================= */
+.back-button {
+    background: #ffffff;
+    color: var(--primary);
+
+    padding: 9px 22px;
+    border-radius: 999px;
+
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* FORCE STATIC */
+.back-button:hover,
+.back-button:active,
+.back-button:focus {
+    background: #ffffff;
+    color: var(--primary);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    outline: none;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+.container {
+    margin: 20px auto 40px;
+    padding: 28px;
+    max-width: 1000px;
+
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-strong);
+}
+
+/* =========================
+   HEADING
+========================= */
+h1 {
+    text-align: center;
+    margin-bottom: 22px;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--text-dark);
+}
+
+/* =========================
+   TABLE
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #ffffff;
+}
+
+th,
+td {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+tbody tr:nth-child(even) {
+    background: #f6f7ff;
+}
+
+tbody tr:hover {
+    background: #eef2ff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 12px 28px;
+        font-size: 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        padding: 26px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+}
+
+/* Small tablets - 768px */
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .container {
+        margin: 0 16px 30px;
+        padding: 22px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 18px;
+    }
+
+    th,
+    td {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .navbar {
+        padding: 14px 20px;
+        font-size: 20px;
+    }
+
+    .back-button {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile - 480px */
+@media (max-width: 480px) {
+    body {
+        padding-top: 90px;
+    }
+
+    .navbar {
+        padding: 10px 14px;
+        font-size: 18px;
+    }
+
+    .back-button {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    .container {
+        margin: 0 10px 24px;
+        padding: 18px 14px;
+        border-radius: 14px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    /* Table card view for mobile */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 12px;
+        background: #f8faff;
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    td {
+        padding: 8px 0;
+        padding-left: 45%;
+        position: relative;
+        text-align: left;
+        font-size: 13px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    td:last-child {
+        border-bottom: none;
+    }
+
+    td::before {
+        position: absolute;
+        left: 14px;
+        font-weight: 700;
+        color: var(--text-dark);
+    }
+
+    td:nth-of-type(1)::before {
+        content: "Name";
+    }
+
+    td:nth-of-type(2)::before {
+        content: "Email";
+    }
+
+    td:nth-of-type(3)::before {
+        content: "Subject";
+    }
+
+    td:nth-of-type(4)::before {
+        content: "Message";
+    }
+}

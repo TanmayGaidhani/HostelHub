@@ -1,0 +1,209 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+    --primary: #2563eb;
+    --secondary: #3b82f6;
+
+    --bg-main: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    --bg-card: #ffffff;
+
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+
+    --border-light: #d1d5db;
+
+    --radius-lg: 22px;
+    --radius-md: 14px;
+
+    --shadow-soft: 0 8px 22px rgba(0,0,0,0.18);
+    --shadow-strong: 0 18px 40px rgba(0,0,0,0.22);
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    background: var(--bg-main);
+    min-height: 100vh;
+    padding-top: 110px;
+    color: var(--text-dark);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    padding: 14px 36px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 800;
+
+    box-shadow: var(--shadow-soft);
+    z-index: 1000;
+}
+
+.back-btn {
+    background: #ffffff;
+    color: var(--primary);
+    padding: 10px 22px;
+    border-radius: 999px;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+    width: 92%;
+    max-width: 1150px;
+    margin: auto;
+
+    background: var(--bg-card);
+    padding: 36px;
+
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-strong);
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 26px;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+/* =========================
+   TABLE
+========================= */
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* HEADER */
+.timetable thead th {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #ffffff;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 800;
+    border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* BODY */
+.timetable td {
+    padding: 14px;
+    border: 1px solid var(--border-light);
+    text-align: center;
+    font-size: 15px;
+}
+
+.day {
+    font-weight: 900;
+    color: var(--primary);
+}
+
+/* =========================
+   BUTTON
+========================= */
+.btn-group {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 14px 30px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #ffffff;
+
+    font-weight: 800;
+    font-size: 16px;
+
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+
+    box-shadow: 0 8px 22px rgba(0,0,0,0.22);
+}
+
+/* ==================================================
+   MOBILE – COMPACT TABLE HEADER ONLY
+   (Desktop unchanged)
+================================================== */
+@media (max-width: 640px) {
+
+    /* Reduce header height */
+    .timetable thead th {
+        padding: 6px 4px;
+        font-size: 12px;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    /* Second header row (Menu / Time) */
+    .timetable thead tr:nth-child(2) th {
+        padding: 4px 3px;
+        font-size: 11px;
+    }
+
+    /* Reduce cell spacing */
+    .timetable td {
+        padding: 6px 4px;
+        font-size: 13px;
+    }
+
+    .day {
+        font-size: 13px;
+        font-weight: 800;
+    }
+
+    .container {
+        padding: 20px 14px;
+    }
+
+    button {
+        width: 100%;
+        font-size: 15px;
+        padding: 12px;
+    }
+}
+/* =========================================
+   MOBILE NAVBAR TITLE SIZE FIX
+========================================= */
+@media (max-width: 640px) {
+
+    .navbar {
+        font-size: 18px;   /* slightly smaller overall */
+    }
+
+    .brand {
+        font-size: 16px;   /* 🔽 title text reduced */
+        font-weight: 800;
+    }
+}

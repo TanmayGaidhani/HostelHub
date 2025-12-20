@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Fees | Admin</title>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <style>
+        /* ==================================================
+           RESET
+        ================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", system-ui, sans-serif;
+        }
+
+        /* ==================================================
+           PAGE BACKGROUND
+        ================================================== */
+        body {
+            background: linear-gradient(135deg, #eef2ff, #dbe7ff);
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        /* ==================================================
+           NAVBAR
+        ================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+
+            background: linear-gradient(90deg, #7b2ff7, #3c8dff);
+            padding: 14px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: white;
+            font-size: 22px;
+            font-weight: 900;
+
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+        }
+
+        /* ==================================================
+           BACK BUTTON (NO HOVER)
+        ================================================== */
+        .nav-back {
+            background: #ffffff;
+            color: #2563eb;
+
+            padding: 10px 22px;
+            border-radius: 999px;
+            font-size: 18px;
+            font-weight: 800;
+
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        /* ==================================================
+           MAIN CONTAINER
+        ================================================== */
+        .page-container {
+            width: 92%;
+            max-width: 1150px;
+            margin: auto;
+
+            background: #ffffff;
+            padding: 38px;
+            border-radius: 20px;
+
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        /* ==================================================
+           HEADERS
+        ================================================== */
+        .header {
+            font-size: 26px;
+            font-weight: 900;
+            color: #0f172a;
+            margin: 26px 0 18px;
+            text-align: center;
+        }
+
+        /* ==================================================
+           TABLE
+        ================================================== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 42px;
+
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ffffff;
+
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        thead tr,
+        table tr:first-child {
+            background: linear-gradient(90deg, #7b2ff7, #3c8dff);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 15px;
+            color: #1e293b;
+        }
+
+        tr:nth-child(even) {
+            background: #f6f7ff;
+        }
+
+
+
+        /* ==================================================
+           STATUS STYLES
+        ================================================== */
+        .status-paid {
+            color: #16a34a;
+            font-weight: 900;
+        }
+
+        .status-pending {
+            color: #dc2626;
+            font-weight: 900;
+        }
+
+        .date-small {
+            color: #475569;
+            font-size: 14px;
+        }
+
+        /* ==================================================
+           RESPONSIVE TABLE
+        ================================================== */
+        @media (max-width: 1024px) {
+            .navbar {
+                padding: 12px 28px;
+                font-size: 20px;
+            }
+
+            .page-container {
+                width: 95%;
+                padding: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+
+            .navbar {
+                padding: 12px 18px;
+                flex-direction: column;
+                gap: 12px;
+                font-size: 18px;
+            }
+
+            .nav-back {
+                width: 100%;
+                max-width: 200px;
+                text-align: center;
+                padding: 8px 18px;
+                font-size: 16px;
+            }
+
+            .page-container {
+                width: 94%;
+                padding: 26px 20px;
+            }
+
+            .header {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            table tr:first-child {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 16px;
+                padding: 14px;
+                border-radius: 14px;
+                background: white;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            }
+
+            td {
+                padding-left: 50%;
+                position: relative;
+                text-align: left;
+                font-size: 14px;
+            }
+
+            td::before {
+                position: absolute;
+                left: 14px;
+                font-weight: 700;
+                color: #0f172a;
+            }
+
+            td:nth-of-type(1)::before {
+                content: "User ID";
+            }
+
+            td:nth-of-type(2)::before {
+                content: "Order ID";
+            }
+
+            td:nth-of-type(3)::before {
+                content: "Payment ID";
+            }
+
+            td:nth-of-type(4)::before {
+                content: "Amount";
+            }
+
+            td:nth-of-type(5)::before {
+                content: "Status";
+            }
+
+            td:nth-of-type(6)::before {
+                content: "When";
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 80px;
+            }
+
+            .navbar {
+                padding: 10px 14px;
+                font-size: 16px;
+            }
+
+            .nav-back {
+                padding: 6px 14px;
+                font-size: 14px;
+            }
+
+            .page-container {
+                width: 96%;
+                padding: 20px 14px;
+                border-radius: 14px;
+            }
+
+            .header {
+                font-size: 20px;
+                margin: 18px 0 14px;
+            }
+
+            tr {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            td {
+                font-size: 13px;
+                padding-left: 45%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 🔵 NAVBAR -->
+    <nav class="navbar">
+        <span>🏢 HostelHub Admin</span>
+        <a href="#" onclick="history.back()" class="nav-back">Back</a>
+    </nav>
+
+    <!-- 🌟 CONTENT -->
+    <div class="page-container">
+
+        <div class="header">Recent Payments</div>
+
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>Order ID</th>
+                <th>Payment ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>When</th>
+            </tr>
+
+            {% for p in payments %}
+            <tr>
+                <td>{{ p.user_id }}</td>
+                <td>{{ p.razorpay_order_id }}</td>
+                <td>{{ p.razorpay_payment_id or '-' }}</td>
+                <td>₹{{ "%.2f"|format(p.amount_rupees|float) }}</td>
+
+                <td class="{{ 'status-paid' if p.status=='paid' else 'status-pending' }}">
+                    {{ p.status|upper }}
+                </td>
+
+                <td class="date-small">{{ p.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</body>
+
+</html>

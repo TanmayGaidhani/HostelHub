@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mess Time-Table</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='timetable.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="brand">🏢 HostelHub Time-Table</div>
+        <a href="{{ url_for('index') }}" class="back-btn">Back</a>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <h1>Mess Time-Table</h1>
+
+        <table class="timetable">
+            <thead>
+                <tr>
+                    <th rowspan="2">Day</th>
+                    <th colspan="2">Breakfast</th>
+                    <th colspan="2">Lunch</th>
+                    <th colspan="2">Dinner</th>
+                </tr>
+                <tr>
+                    <th>Menu</th>
+                    <th>Time</th>
+                    <th>Menu</th>
+                    <th>Time</th>
+                    <th>Menu</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in timetable %}
+                <tr>
+                    <td class="day">{{ item.day }}</td>
+
+                    <td>{{ item.breakfast or "NULL" }}</td>
+                    <td>{{ item.breakfast_time or "N/A" }}</td>
+
+                    <td>{{ item.lunch or "NULL" }}</td>
+                    <td>{{ item.lunch_time or "N/A" }}</td>
+
+                    <td>{{ item.dinner or "NULL" }}</td>
+                    <td>{{ item.dinner_time or "N/A" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="btn-group">
+            <button id="download">Download PDF</button>
+        </div>
+    </div>
+
+</body>
+</html>

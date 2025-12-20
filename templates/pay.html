@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pay.css') }}">
+    <title>Payment - HostelHub</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+    <a href="{{ url_for('bill') }}" class="back-button">Back</a>
+    <div class="container">
+        <h2>Pay Your Mess Bill - {{ current_month }}</h2>
+        <p>Total Amount: ₹{{ amount }}</p>
+
+        <!-- Embed Razorpay config in data attributes -->
+        <button id="rzp-button" class="button" data-amount="{{ amount }}" data-month="{{ current_month }}"
+            data-key="{{ key }}">
+            Confirm Pay
+        </button>
+    </div>
+
+    <!-- Razorpay Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- Load your external JavaScript -->
+    <script src="{{ url_for('static', filename='pay.js') }}"></script>
+</body>
+
+</html>

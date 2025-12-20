@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Status - HostelHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminattendance.css') }}">
+
+    <!-- JS PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="{{ url_for('adminindex') }}" class="nav-title">HostelHub Admin</a>
+
+        <a href="#" onclick="history.back()" class="nav-back">Back</a>
+    </nav>
+
+    <!-- PAGE TITLE -->
+    <h1>Student Attendance Status</h1>
+
+    <!-- DATE FORM -->
+    <form id="dateForm" method="GET" action="{{ url_for('adminattendance') }}">
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" value="{{ selected_date if selected_date else '' }}" required>
+        <button type="submit">Show</button>
+    </form>
+
+    <span id="selectedDate" style="display:none;">{{ selected_date }}</span>
+
+    {% if selected_date %}
+
+    <!-- SUMMARY -->
+    <div class="summary-box">
+        Date: {{ selected_date }} |
+        Present: <span class="present">{{ present_count }}</span> |
+        Absent: <span class="absent">{{ absent_count }}</span>
+    </div>
+
+    <!-- TABLE -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="studentTable">
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.mobile_no }}</td>
+                <td>{{ student.email }}</td>
+                <td class="{{ 'present' if student.status == 'Present' else 'absent' }}">{{ student.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="download-container">
+        <button id="downloadPDF">Download as PDF</button>
+    </div>
+
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='adminattendance.js') }}"></script>
+
+</body>
+
+</html>

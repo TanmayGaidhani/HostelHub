@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Helpline Number - HostelHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminhelpline.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-title">📞 Set Helpline Number</div>
+        <a href="{{ url_for('xHostelIndex') }}" class="nav-back">Back</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="form-wrapper">
+
+        <form name="helplineForm" method="POST" onsubmit="return validateForm()" class="helpline-card">
+
+            <h2>Enter 10-digit Helpline Number</h2>
+
+            <input type="text" name="helpline" maxlength="10" placeholder="Enter 10-digit number" required>
+
+            <button type="submit">Save Number</button>
+
+            {% if message %}
+            <p class="success-msg">{{ message }}</p>
+            {% endif %}
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='adminhelpline.js') }}"></script>
+
+</body>
+
+</html>

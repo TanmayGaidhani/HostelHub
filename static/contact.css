@@ -1,0 +1,359 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #3b82f6;
+    --bg-main: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    --bg-card: #ffffff;
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+    --border-light: #cbd5e1;
+
+    --radius-lg: 24px;
+    --radius-md: 14px;
+
+    --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.18);
+    --shadow-strong: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    background: var(--bg-main);
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    width: 100%;
+    height: 72px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 36px;
+    font-size: 22px;
+    font-weight: 800;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    box-shadow: var(--shadow-soft);
+}
+
+/* BRAND */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* LOGO */
+.nav-logo {
+    width: 32px;
+    height: 32px;
+}
+
+/* =========================
+   BACK BUTTON (NO HOVER AT ALL)
+========================= */
+.navbar-back {
+    background: #ffffff;
+    color: var(--primary);
+
+    padding: 8px 22px;
+    border-radius: 999px;
+
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    margin-right: 30px;
+}
+
+/* FORCE DISABLE HOVER / ACTIVE / FOCUS */
+.navbar-back:hover,
+.navbar-back:active,
+.navbar-back:focus {
+    background: #ffffff;
+    color: var(--primary);
+    transform: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    outline: none;
+}
+
+/* =========================
+   FORM WRAPPER
+========================= */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 40px;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+.feedback-form {
+    background: var(--bg-card);
+    width: 92%;
+    max-width: 720px;
+
+    padding: 40px 34px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-strong);
+
+    text-align: center;
+}
+
+/* =========================
+   FORM TITLE
+========================= */
+.feedback-form h2 {
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 26px;
+    color: var(--text-dark);
+}
+
+/* =========================
+   LABELS
+========================= */
+.feedback-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* =========================
+   INPUT & TEXTAREA
+========================= */
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+
+    font-size: 15px;
+    background: #f8faff;
+    color: var(--text-dark);
+
+    margin-bottom: 18px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feedback-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.35);
+}
+
+/* =========================
+   FLASH / MESSAGE BOX
+========================= */
+.flash-message {
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.flash-message.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.flash-message.error {
+    background: #fee2e2;
+    color: #7f1d1d;
+}
+
+/* =========================
+   SUBMIT BUTTON (HOVER ALLOWED)
+========================= */
+.btn-custom {
+    width: 100%;
+    padding: 16px;
+
+    border-radius: var(--radius-md);
+    border: none;
+
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    cursor: pointer;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+    transition: transform 0.15s ease, box-shadow 0.25s ease;
+
+    margin-top: 18px;
+}
+
+.btn-custom:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 0 28px;
+        height: 66px;
+        font-size: 20px;
+    }
+
+    .form-wrapper {
+        padding-top: 110px;
+    }
+
+    .feedback-form {
+        max-width: 640px;
+        padding: 36px 30px;
+    }
+}
+
+/* Small tablets - 768px */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;
+        height: 62px;
+        font-size: 18px;
+    }
+
+    .navbar-back {
+        font-size: 16px;
+        padding: 6px 16px;
+        margin-right: 20px;
+    }
+
+    .form-wrapper {
+        padding-top: 100px;
+        padding-bottom: 30px;
+    }
+
+    .feedback-form {
+        padding: 32px 24px;
+    }
+
+    .feedback-form h2 {
+        font-size: 22px;
+        margin-bottom: 22px;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    .btn-custom {
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+/* Mobile - 480px */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 14px;
+        height: 56px;
+        font-size: 16px;
+    }
+
+    .navbar-back {
+        font-size: 14px;
+        padding: 5px 12px;
+        margin-right: 0;
+    }
+
+    .form-wrapper {
+        padding-top: 90px;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-bottom: 24px;
+    }
+
+    .feedback-form {
+        padding: 26px 18px;
+        border-radius: 18px;
+    }
+
+    .feedback-form h2 {
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+
+    .feedback-form label {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea {
+        padding: 12px;
+        font-size: 16px;
+        margin-bottom: 14px;
+        border-radius: 10px;
+    }
+
+    .feedback-form textarea {
+        min-height: 100px;
+    }
+
+    .flash-message {
+        padding: 12px 14px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    .btn-custom {
+        padding: 14px;
+        font-size: 15px;
+        margin-top: 14px;
+        border-radius: 10px;
+    }
+}

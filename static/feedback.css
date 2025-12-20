@@ -1,0 +1,234 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #3b82f6;
+    --bg-main: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    --bg-card: #ffffff;
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+    --border-light: #d1d5db;
+    --radius-lg: 24px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.18);
+    --shadow-strong: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   RESET
+========================= */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    background: var(--bg-main);
+    min-height: 100vh;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    width: 100%;
+    height: 68px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 36px;
+    font-size: 22px;
+    font-weight: 800;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: var(--shadow-soft);
+    z-index: 1000;
+}
+
+/* BACK BUTTON – CONSISTENT */
+.navbar-back {
+    background: #ffffff;
+    color: var(--primary);
+    padding: 8px 22px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    transition: all 0.25s ease;
+    margin-right: 30px;
+}
+
+.navbar-back:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   FORM WRAPPER
+========================= */
+.form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 110px 20px 40px;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+.feedback-form {
+    background: var(--bg-card);
+    padding: 46px 38px;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 900px;
+    box-shadow: var(--shadow-strong);
+    text-align: center;
+}
+
+/* =========================
+   INPUTS
+========================= */
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    padding: 14px;
+    font-size: 15px;
+    background: #f8faff;
+    transition: all 0.25s ease;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+    outline: none;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+.submit-button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 18px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border: none;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 800;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+.submit-button:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 0 28px;
+        height: 62px;
+        font-size: 20px;
+    }
+
+    .feedback-form {
+        max-width: 800px;
+        padding: 40px 32px;
+    }
+}
+
+/* Small tablets - 768px */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;
+        height: 58px;
+        font-size: 18px;
+    }
+
+    .navbar-back {
+        padding: 6px 18px;
+        font-size: 16px;
+    }
+
+    .form-wrapper {
+        padding: 100px 16px 32px;
+    }
+
+    .feedback-form {
+        padding: 36px 26px;
+        max-width: 600px;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .submit-button {
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+/* Mobile - 480px */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 14px;
+        height: 54px;
+        font-size: 16px;
+    }
+
+    .navbar-back {
+        padding: 5px 14px;
+        font-size: 14px;
+        margin-right: 0;
+    }
+
+    .form-wrapper {
+        padding: 90px 12px 24px;
+    }
+
+    .feedback-form {
+        padding: 28px 18px;
+        border-radius: 18px;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 10px;
+    }
+
+    .submit-button {
+        padding: 14px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+}

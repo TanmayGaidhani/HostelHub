@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Notification - HostelHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminnotification.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-title">Send Notification</div>
+        <a href="#" onclick="history.back()" class="nav-back">Back</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <h2>Send Notification</h2>
+
+        <form method="POST">
+            <textarea name="message" placeholder="Enter your notification..." required></textarea>
+            <button type="submit">Send</button>
+        </form>
+
+        {% if message %}
+        <div class="notification">
+            {{ message }}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

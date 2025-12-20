@@ -1,0 +1,539 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #f3f5ff;
+    color: #111827;
+    overflow-x: hidden;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background: linear-gradient(90deg, #6d28d9, #2563eb);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Buttons */
+.pill-btn {
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    padding: 9px 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.helpline-pill {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
+.login-btn {
+    background: #ffffff;
+    color: #2563eb;
+}
+
+.login-btn:hover {
+    background: #e9edff;
+}
+
+/* Dropdown */
+.login-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    list-style: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    padding: 10px 0;
+    min-width: 190px;
+    display: none;
+    z-index: 9999;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 12px 16px;
+    color: #1f2937;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dropdown-menu li a:hover {
+    background: #eef2ff;
+    color: #2563eb;
+}
+
+/* ================= HERO SECTION ================= */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 60px;
+}
+
+.hero-inner {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 70px;
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-tag {
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #4f46e5;
+    margin-bottom: 12px;
+}
+
+.hero-text h1 {
+    font-size: 62px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 22px;
+}
+
+.hero-text h1 span {
+    background: linear-gradient(90deg, #7b2ff7, #3b82f6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-description {
+    font-size: 20px;
+    color: #475569;
+    line-height: 1.7;
+    max-width: 580px;
+}
+
+/* HERO IMAGE */
+.hero-img img {
+    width: 720px;
+    height: 380px;
+    max-width: 100%;
+    border-radius: 28px;
+    box-shadow: 0 35px 65px rgba(20, 20, 40, 0.4);
+    transition: 0.4s ease;
+}
+
+.hero-img img:hover {
+    transform: scale(1.04);
+}
+
+/* SHOWCASE */
+.showcase img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 0;
+    margin-top: 50px;
+}
+
+/* ================= LOGIN SECTION ================= */
+.login-section {
+    padding: 90px 30px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.login-section h2 {
+    font-size: 40px;
+    margin-bottom: 35px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.login-cards {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #fafafa;
+    padding: 28px;
+    width: 310px;
+    border-radius: 20px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    transition: .35s;
+    text-align: left;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.18);
+}
+
+.card a {
+    background: #2563eb;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+/* ================= FEATURES ================= */
+.full-features {
+    padding: 85px 30px 95px;
+    background: #eef1ff;
+    text-align: center;
+}
+
+.full-features h2 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.subtext {
+    color: #4b5563;
+    font-size: 17px;
+}
+
+.feature-grid {
+    max-width: 1150px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 24px;
+}
+
+.f-card {
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(148, 163, 184, 0.25);
+    transition: .3s;
+}
+
+.f-card:hover {
+    transform: translateY(-8px);
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background: #0f172a;
+    color: #e5e7eb;
+    text-align: center;
+    padding: 18px;
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets & small laptops */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 16px 25px;
+    }
+
+    .hero-text h1 {
+        font-size: 48px;
+    }
+
+    .hero-description {
+        font-size: 18px;
+    }
+
+    .hero-img img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+    .hero {
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .hero-inner {
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .hero-text {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero-text h1 {
+        font-size: 42px;
+    }
+
+    .hero-description {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-img {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 600px) {
+
+    /* Navbar */
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+
+    .nav-right {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .pill-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+
+    .helpline-pill {
+        font-size: 13px;
+    }
+
+    .login-btn {
+        padding: 10px 20px;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: auto;
+        padding: 30px 16px;
+    }
+
+    .hero-inner {
+        gap: 30px;
+    }
+
+    .hero-text {
+        width: 100%;
+        padding: 0 8px;
+    }
+
+    .hero-tag {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+        line-height: 1.3;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 0 5px;
+    }
+
+    .hero-img {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .hero-img img {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+    }
+
+    /* Login section */
+    .login-section {
+        padding: 50px 16px;
+    }
+
+    .login-section h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .login-cards {
+        gap: 18px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 100%;
+        padding: 22px 18px;
+        margin: 0 auto;
+    }
+
+    .card h3 {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 14px;
+    }
+
+    .card a {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+
+    /* Features */
+    .full-features {
+        padding: 50px 16px;
+    }
+
+    .full-features h2 {
+        font-size: 24px;
+    }
+
+    .subtext {
+        font-size: 14px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 25px;
+    }
+
+    .f-card {
+        padding: 22px 18px;
+    }
+
+    .f-card h3 {
+        font-size: 16px;
+    }
+
+    .f-card p {
+        font-size: 13px;
+    }
+
+    /* Footer */
+    footer {
+        font-size: 13px;
+        padding: 14px 12px;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 400px) {
+    .navbar {
+        padding: 12px 12px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .pill-btn {
+        font-size: 13px;
+        padding: 8px 14px;
+    }
+
+    .hero {
+        padding: 25px 12px;
+    }
+
+    .hero-tag {
+        font-size: 10px;
+    }
+
+    .hero-text h1 {
+        font-size: 24px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .login-section h2,
+    .full-features h2 {
+        font-size: 22px;
+    }
+
+    .card {
+        padding: 18px 14px;
+    }
+
+    .f-card {
+        padding: 18px 14px;
+    }
+}

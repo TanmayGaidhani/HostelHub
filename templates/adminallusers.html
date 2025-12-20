@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>All Students - HostelHub</title>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #eef2ff;
+        }
+
+        /* ===== Top Header ===== */
+        .top-bar {
+            width: 100%;
+            padding: 18px 30px;
+            background: linear-gradient(90deg, #7b2ff7, #3f8cff);
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn {
+            background: #ffffff;
+            color: #2563eb;
+
+            padding: 10px 22px;
+            /* SAME SIZE */
+            border-radius: 999px;
+            /* PERFECT PILL */
+            text-decoration: none;
+
+            font-size: 16px;
+            font-weight: 800;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            transition: 0.25s ease;
+        }
+
+
+
+
+        /* ===== Page Wrapper ===== */
+        .page-wrapper {
+            padding: 40px 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ===== Card ===== */
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+            animation: fadeIn 0.6s ease;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #1f2937;
+            text-align: center;
+        }
+
+        /* ===== Filters ===== */
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .filters select {
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+        }
+
+        /* ===== Table ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        thead {
+            background: linear-gradient(90deg, #7b2ff7, #3f8cff);
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f5f7ff;
+        }
+
+        tbody tr:hover {
+            background: #e0e7ff;
+        }
+
+        /* ===== Buttons ===== */
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        .button-group {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #1e40af;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="top-bar">
+        HostelHub - All Students
+        <a href="javascript:history.back()" class="back-btn">Back</a>
+    </div>
+
+    <!-- Content -->
+    <div class="page-wrapper">
+        <div class="container">
+
+            <h1>All Students</h1>
+
+            <!-- Filters -->
+            <div class="filters">
+                <select id="branchFilter" onchange="filterTable()">
+                    <option value="">All Branches</option>
+                    <option value="CSE">CSE</option>
+                    <option value="IT">IT</option>
+                    <option value="ECE">ECE</option>
+                    <option value="MECH">MECH</option>
+                    <option value="CIVIL">CIVIL</option>
+                </select>
+
+                <select id="yearFilter" onchange="filterTable()">
+                    <option value="">All Years</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+            </div>
+
+            <!-- Table -->
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>Sr. No</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Address</th>
+                        <th>Mobile No</th>
+                        <th>Email</th>
+                        <th>Branch</th>
+                        <th>Year</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.address }}</td>
+                        <td>{{ user.mobile_no }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.academic_branch }}</td>
+                        <td>{{ user.academic_year }}</td>
+                        <td>
+                            <button class="delete-btn" onclick="deleteUser('{{ user._id }}')">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="button-group">
+                <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JS (unchanged) -->
+    <script>
+        function filterTable() {
+            let branch = document.getElementById("branchFilter").value.toLowerCase();
+            let year = document.getElementById("yearFilter").value.toLowerCase();
+
+            let rows = document.querySelectorAll("#userTable tbody tr");
+
+            rows.forEach(row => {
+                let branchCell = row.children[6].innerText.toLowerCase();
+                let yearCell = row.children[7].innerText.toLowerCase();
+
+                let visible =
+                    (branch === "" || branchCell === branch) &&
+                    (year === "" || yearCell === year);
+
+                row.style.display = visible ? "" : "none";
+            });
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="{{ url_for('static', filename='adminallusers.js') }}"></script>
+
+</body>
+
+</html>

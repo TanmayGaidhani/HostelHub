@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - HostelHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='notification.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="brand-navbar">🏢 <span>HostelHub</span></div>
+        <a href="{{ url_for('index') }}" class="back-nav">Back</a>
+    </nav>
+
+    <div class="container">
+        <h2>Notifications</h2>
+
+        {% for note in notifications %}
+        <div class="notification">
+            <p>{{ note.message }}</p>
+            <span class="time"><i class="bi bi-clock-history"></i> {{ note.datetime }}</span>
+        </div>
+        {% else %}
+        <p class="empty">No notifications available yet.</p>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

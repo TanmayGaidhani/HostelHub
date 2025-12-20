@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="brand-navbar">
+            🏢 <span>HostelHub Register</span>
+        </div>
+        <a href="#" onclick="history.back()" class="back-button" title="Go back">Back</a>
+    </nav>
+    <div class="registration-form">
+        <h2>Register To HostelHub</h2>
+        <form method="POST" autocomplete="off">
+            {{ form.hidden_tag() }}
+
+            <div class="form-row">
+                <div class="input-pair">
+                    <label for="name">Full Name</label>
+                    {{ form.name(id="name", placeholder="Enter your full name", class="input-field", required=True) }}
+                </div>
+                <div class="input-pair">
+                    <label for="email">Email-ID</label>
+                    {{ form.email(id="email", placeholder="Enter your email", class="input-field", required=True) }}
+                    <p class="error-message" style="display: none;"></p>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-pair">
+                    <label for="mobile">Mobile Number</label>
+                    <div class="mobile-with-otp">
+                        {{ form.mobile_no(id="mobile", placeholder="Enter mobile number", class="input-field",
+                        required=True) }}
+                        <button type="button" id="getOtpBtn">Get OTP</button>
+                    </div>
+
+                </div>
+                <div class="input-pair">
+                    <label for="address">Address</label>
+                    {{ form.address(id="address", placeholder="Enter address", class="input-field", rows="3",
+                    required=True) }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-pair">
+                    <label for="academic_branch">Academic Branch</label>
+                    <select id="academic_branch" name="academic_branch" class="input-field" required>
+                        <option value="" disabled selected>Select Branch</option>
+                        <option value="CSE">Computer Science Engineering</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="ECE">Electronics and Communication</option>
+                        <option value="EEE">Electrical and Electronics</option>
+                        <option value="ME">Mechanical Engineering</option>
+                        <option value="CE">Civil Engineering</option>
+                        <option value="AI">Artificial Intelligence</option>
+                        <option value="DS">Data Science</option>
+                        <option value="CSBS">Computer Science & Business Systems</option>
+                    </select>
+                </div>
+
+                <div class="input-pair">
+                    <label for="academic_year">Academic Year</label>
+                    <select id="academic_year" name="academic_year" class="input-field" required>
+                        <option value="" disabled selected>Select Year</option>
+                        <option value="1">First Year</option>
+                        <option value="2">Second Year</option>
+                        <option value="3">Third Year</option>
+                        <option value="4">Fourth Year</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="input-pair">
+                    <label for="username">Username</label>
+                    {{ form.username(id="username", placeholder="Enter username", class="input-field", required=True) }}
+                    <p class="error-message" style="display: none;"></p>
+                </div>
+                <div class="input-pair">
+                    <label for="password">Password</label>
+                    {{ form.password(id="password", placeholder="Enter password", class="input-field", required=True,
+                    autocomplete="new-password") }}
+                    <p class="error-message" style="display: none;"></p>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-pair">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" placeholder="Re-enter password" class="input-field"
+                        required>
+                </div>
+                <div class="input-pair">
+                    <label for="gender">Gender</label>
+                    {{ form.gender(id="gender", class="input-field", required=True) }}
+                </div>
+            </div>
+
+            <div class="otp-block" autocomplete="off">
+                <label>Enter OTP</label>
+                <div class="otp-inputs">
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                    <input type="text" maxlength="1" required>
+                </div>
+                <button type="button" id="verifyOtpBtn">Verify OTP</button>
+            </div>
+
+            <button type="submit" class="submit-button" id="registerBtn" disabled>{{ form.submit.label.text }}</button>
+
+            <p class="lgin">I have an account !
+                <a href="{{ url_for('login') }}">Login</a>
+            </p>
+
+            {% for field in form %}
+            {% for error in field.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='register.js') }}"></script>
+
+    <footer>
+        <p>© 2025 HostelHub • Designed by Nikhil and Tanmay</p>
+    </footer>
+</body>
+
+</html>

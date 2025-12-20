@@ -1,0 +1,268 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ae91db, #ab9c9c);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Container */
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 1250px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.container h1 {
+    margin-bottom: 25px;
+    font-size: 32px;
+    color: #333;
+    font-weight: 700;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fafafa;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+th,
+td {
+    padding: 14px;
+    border: 1px solid #c9c9c9;
+    font-size: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #d9cdf7;
+    color: #1e1e1e;
+    font-weight: 700;
+}
+
+tr:nth-child(even) {
+    background-color: #f3f3ff;
+}
+
+tr:hover td {
+    background-color: #eef3ff;
+    transition: 0.25s ease-in-out;
+}
+
+/* Filter Section */
+.filters {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filters select {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+button,
+#back-button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    background-color: #7b2ff7;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+#back-button:hover {
+    background-color: #5e20c6;
+}
+
+/* Back Button Fixed */
+#back-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 999;
+}
+
+/* Delete Button */
+.delete-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff4d4d;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Responsive Fixes */
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+        padding: 32px;
+    }
+
+    .container h1 {
+        font-size: 28px;
+    }
+}
+
+/* Small tablets - 900px */
+@media (max-width: 900px) {
+
+    th,
+    td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 25px;
+    }
+}
+
+/* Tablets - 768px */
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+
+    .container {
+        padding: 22px 18px;
+        margin: 15px auto;
+    }
+
+    .container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .filters {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .filters select {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    #back-button {
+        padding: 8px 16px;
+        font-size: 13px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    button,
+    #back-button {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+}
+
+/* Mobile - 600px */
+@media (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .container h1 {
+        font-size: 22px;
+    }
+}
+
+/* Mobile - 480px */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 18px 14px;
+        border-radius: 12px;
+    }
+
+    .container h1 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    th,
+    td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    .filters select {
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+
+    button,
+    #back-button {
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+
+    .delete-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    #back-button {
+        top: 8px;
+        right: 8px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

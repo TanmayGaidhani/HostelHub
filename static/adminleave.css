@@ -1,0 +1,287 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* ================= PAGE BACKGROUND ================= */
+body {
+    background: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    padding-top: 110px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    background: linear-gradient(90deg, #7b2ff7, #3c8dff);
+    padding: 14px 40px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: 900;
+    font-size: 22px;
+
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+}
+
+/* ================= BACK BUTTON ================= */
+.nav-back {
+    background: #ffffff;
+    color: #2563eb;
+
+    padding: 10px 22px;
+    /* SAME SIZE everywhere */
+    border-radius: 999px;
+    /* pill shape */
+
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 800;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    transition: 0.25s ease;
+}
+
+
+
+/* ================= MAIN CONTENT CARD ================= */
+.container {
+    width: 92%;
+    max-width: 920px;
+    background: white;
+    padding: 38px 34px;
+    border-radius: 20px;
+    box-shadow: 0 14px 42px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* ================= HEADING ================= */
+h1 {
+    font-size: 28px;
+    color: #0f172a;
+    margin-bottom: 22px;
+    font-weight: 900;
+}
+
+/* ================= TABLE ================= */
+table {
+    width: 100%;
+    margin-top: 18px;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+thead {
+    background: linear-gradient(90deg, #7b2ff7, #3c8dff);
+    color: white;
+}
+
+th,
+td {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 16px;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background: #f5f6ff;
+}
+
+tbody tr:hover {
+    background: #eef2ff;
+    transition: 0.2s ease;
+}
+
+/* ================= VIEW BUTTON ================= */
+.btn-view {
+    padding: 9px 18px;
+    background: linear-gradient(90deg, #3c8dff, #2563eb);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.25s;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.btn-view:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+/* ================= NO DATA ================= */
+.no-data {
+    font-size: 18px;
+    color: #475569;
+    font-style: italic;
+    margin-top: 22px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 12px 28px;
+        font-size: 20px;
+    }
+
+    .container {
+        max-width: 850px;
+        padding: 34px 30px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+}
+
+/* Small tablets - 768px */
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .navbar {
+        padding: 12px 20px;
+        font-size: 18px;
+    }
+
+    .nav-back {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+
+    .container {
+        width: 94%;
+        padding: 30px 24px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 18px;
+    }
+
+    th,
+    td {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+/* Mobile - 480px */
+@media (max-width: 480px) {
+    body {
+        padding-top: 90px;
+    }
+
+    .navbar {
+        padding: 10px 14px;
+        font-size: 16px;
+    }
+
+    .nav-back {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    .container {
+        width: 96%;
+        padding: 24px 18px;
+        border-radius: 16px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    /* Table card view */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 14px;
+        background: #fff;
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    td {
+        padding: 8px 0;
+        padding-left: 45%;
+        position: relative;
+        text-align: left;
+        font-size: 14px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    td:last-child {
+        border-bottom: none;
+    }
+
+    td::before {
+        position: absolute;
+        left: 14px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    td:nth-of-type(1)::before {
+        content: "Student";
+    }
+
+    td:nth-of-type(2)::before {
+        content: "Date";
+    }
+
+    td:nth-of-type(3)::before {
+        content: "Status";
+    }
+
+    td:nth-of-type(4)::before {
+        content: "Action";
+    }
+
+    .btn-view {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 16px;
+    }
+
+    .no-data {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,527 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #3b82f6;
+
+    --bg-main: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    --bg-card: #ffffff;
+
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+
+    --border-light: #d1d5db;
+
+    --radius-lg: 28px;
+    --radius-md: 14px;
+
+    --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.18);
+    --shadow-strong: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    background: var(--bg-main);
+    padding-top: 96px;
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+
+    padding: 14px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+
+    box-shadow: var(--shadow-soft);
+    z-index: 1000;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+/* Back button */
+.nav-back {
+    background: #ffffff;
+    color: var(--primary);
+    padding: 10px 22px;
+    border-radius: 999px;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================
+   MAIN WRAPPER
+========================= */
+.attendance-wrapper {
+    width: 92%;
+    max-width: 1200px;
+    margin: 40px auto;
+
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-strong);
+
+    display: flex;
+    overflow: hidden;
+}
+
+/* =========================
+   LEFT CARD
+========================= */
+.left-card {
+    flex: 1;
+    padding: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.left-card h2 {
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 26px;
+}
+
+/* =========================
+   FORM
+========================= */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+input[type="date"] {
+    padding: 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-light);
+    font-size: 15px;
+    background: #f8faff;
+}
+
+input[type="date"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+}
+
+/* =========================
+   BUTTON
+========================= */
+button {
+    margin-top: 10px;
+    padding: 16px;
+
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #ffffff;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================
+   MESSAGE
+========================= */
+#message {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+/* =========================
+   RIGHT IMAGE
+========================= */
+.right-image {
+    flex: 1.1;
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.right-image img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================================================
+   LAPTOP - 1024px
+================================================== */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 12px 28px;
+        font-size: 20px;
+    }
+
+    .attendance-wrapper {
+        max-width: 95%;
+        margin: 32px auto;
+    }
+
+    .left-card {
+        padding: 50px;
+    }
+
+    .left-card h2 {
+        font-size: 24px;
+    }
+
+    .right-image img {
+        max-width: 380px;
+    }
+}
+
+/* ==================================================
+   TABLET - 768px
+================================================== */
+@media (max-width: 768px) {
+    body {
+        padding-top: 86px;
+    }
+
+    .navbar {
+        padding: 12px 20px;
+        font-size: 18px;
+    }
+
+    .brand {
+        font-size: 17px;
+    }
+
+    .nav-back {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+
+    .attendance-wrapper {
+        flex-direction: column;
+        width: 94%;
+        margin: 28px auto;
+    }
+
+    .left-card {
+        padding: 36px 24px;
+    }
+
+    .left-card h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .right-image {
+        padding: 24px;
+    }
+
+    .right-image img {
+        max-width: 300px;
+        border-radius: 18px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* ==================================================
+   TABLET SMALL - 600px
+================================================== */
+@media (max-width: 600px) {
+
+    body {
+        padding-top: 82px;
+    }
+
+    .navbar {
+        padding: 14px 18px;
+        font-size: 18px;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .nav-back {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .attendance-wrapper {
+        margin: 24px auto;
+    }
+
+    .left-card {
+        padding: 28px 20px;
+    }
+
+    .left-card h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .right-image {
+        padding: 20px;
+    }
+
+    .right-image img {
+        max-width: 260px;
+    }
+}
+
+/* ==================================================
+   MOBILE
+================================================== */
+@media (max-width: 600px) {
+
+    body {
+        padding-top: 82px;
+    }
+
+    .navbar {
+        padding: 14px 18px;
+        font-size: 18px;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .nav-back {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .attendance-wrapper {
+        margin: 24px auto;
+    }
+
+    .left-card {
+        padding: 28px 20px;
+    }
+
+    .left-card h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .right-image {
+        padding: 20px;
+    }
+
+    .right-image img {
+        max-width: 260px;
+    }
+}
+
+/* =========================================
+   MOBILE VIEW – PROPER ATTENDANCE LAYOUT
+========================================= */
+@media (max-width: 600px) {
+
+    /* Wrapper spacing */
+    .attendance-wrapper {
+        width: 94%;
+        margin: 20px auto;
+        border-radius: 20px;
+    }
+
+    /* Left card (form) */
+    .left-card {
+        padding: 24px 18px;
+        align-items: stretch;
+    }
+
+    .left-card h2 {
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 18px;
+    }
+
+    /* Form fields */
+    label {
+        font-size: 14px;
+    }
+
+    input[type="date"] {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    /* Button full width */
+    button {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+
+    /* Message */
+    #message {
+        text-align: center;
+        font-size: 13px;
+    }
+
+    /* Image section moves BELOW form */
+    .right-image {
+        padding: 16px;
+        justify-content: center;
+    }
+
+    .right-image img {
+        max-width: 220px;
+        border-radius: 16px;
+    }
+
+    /* Navbar title smaller */
+    .navbar {
+        font-size: 18px;
+        padding: 12px 16px;
+    }
+
+    .brand {
+        font-size: 15px;
+    }
+
+    .nav-back {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+}
+
+/* =========================================
+   MOBILE VIEW – CLEAN FORM ONLY (NO IMAGE)
+========================================= */
+@media (max-width: 600px) {
+
+    /* Body spacing */
+    body {
+        padding-top: 82px;
+    }
+
+    /* Navbar */
+    .navbar {
+        padding: 12px 16px;
+        font-size: 18px;
+    }
+
+    .brand {
+        font-size: 15px;
+    }
+
+    .nav-back {
+        padding: 6px 14px;
+        font-size: 13px;
+    }
+
+    /* Main wrapper */
+    .attendance-wrapper {
+        width: 94%;
+        margin: 24px auto;
+        border-radius: 22px;
+    }
+
+    /* REMOVE IMAGE COMPLETELY */
+    .right-image {
+        display: none;
+    }
+
+    /* Form card takes full width */
+    .left-card {
+        padding: 36px 22px;
+        /* ⬆ bigger box */
+        width: 100%;
+    }
+
+    .left-card h2 {
+        font-size: 22px;
+        text-align: center;
+        margin-bottom: 22px;
+    }
+
+    /* Form */
+    label {
+        font-size: 15px;
+    }
+
+    input[type="date"] {
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    /* Button */
+    button {
+        width: 100%;
+        padding: 16px;
+        font-size: 16px;
+        border-radius: 14px;
+        margin-top: 6px;
+    }
+
+    /* Message */
+    #message {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 18px;
+    }
+}

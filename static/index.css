@@ -1,0 +1,608 @@
+ /* ==================================================
+   THEME VARIABLES
+================================================== */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #3b82f6;
+    --accent: #6d28d9;
+
+    --bg-main: linear-gradient(135deg, #eef2ff, #dbe7ff);
+    --bg-card: #ffffff;
+    --bg-dark: #0f172a;
+
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+
+    --radius-lg: 18px;
+    --radius-md: 14px;
+
+    --shadow-soft: 0 6px 18px rgba(0,0,0,0.15);
+    --shadow-strong: 0 14px 35px rgba(37,99,235,0.35);
+}
+
+/* ==================================================
+   RESET
+================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* ==================================================
+   BODY
+================================================== */
+body {
+    background: var(--bg-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* ==================================================
+   NAVBAR
+================================================== */
+.navbar {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;               /* 🔥 IMPORTANT */
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-soft);
+}
+
+/* Menu Icon */
+.menu_icon {
+    flex-shrink: 0;
+}
+.menu_icon i {
+    font-size: 26px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Logo */
+.logo {
+    flex-shrink: 1;
+    min-width: 0;
+}
+.logo .h1logo {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+}
+
+/* ================= RIGHT ICON GROUP ================= */
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* Icon-only links */
+.nav-links a {
+    font-size: 0;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-links a i {
+    font-size: 22px;
+    color: #fff;
+}
+
+/* Dark Mode */
+.mode-toggle {
+    background: none;
+    border: none;
+    padding: 6px;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.mode-toggle i {
+    font-size: 20px;
+}
+
+/* Profile */
+.profile-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.profile-link span {
+    display: none;
+}
+
+.profile-link img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+
+.profile-link i {
+    font-size: 26px;
+    color: #fff;
+    padding: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+}
+
+/* ==================================================
+   SIDEBAR
+================================================== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(180deg, var(--accent), var(--primary-dark));
+    padding: 20px;
+    color: #fff;
+    transition: left 0.3s ease;
+    z-index: 2000;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    margin-top: 80px;
+}
+
+.sidebar li {
+    margin-bottom: 22px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* ==================================================
+   LED BANNER
+================================================== */
+.led-banner {
+    width: 100%;
+    height: 38px;
+    background: #111827;
+    overflow: hidden;
+}
+
+.led-text {
+    white-space: nowrap;
+    color: #60a5fa;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 38px;
+    animation: scroll 18s linear infinite;
+}
+
+@keyframes scroll {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-120%); }
+}
+
+/* ==================================================
+   FEATURE CARDS
+================================================== */
+.feature-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 26px 20px;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.feature-card i {
+    font-size: 48px;
+    color: var(--accent);
+}
+
+.feature-card h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 12px;
+}
+
+.feature-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+.footer {
+    background: #111827;
+    color: #cbd5f5;
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    margin-top: auto;
+}
+
+/* ==================================================
+   DARK MODE
+================================================== */
+.dark-mode {
+    background: #0b1220 !important;
+    color: #e5e7eb;
+}
+
+.dark-mode .navbar,
+.dark-mode .sidebar,
+.dark-mode .footer {
+    background: #020617;
+}
+
+.dark-mode .feature-card {
+    background: #020617;
+    color: #fff;
+}
+
+/* ==================================================
+   DESKTOP FIX
+================================================== */
+@media (min-width: 992px) {
+    .logo .h1logo {
+        font-size: 24px;
+        max-width: none;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+    }
+
+    .nav-links a i {
+        font-size: 18px;
+    }
+
+    .profile-link span {
+        display: inline;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 6px;
+    }
+}
+/* =========================================
+   PERFECT ICON VERTICAL ALIGNMENT (MOBILE)
+========================================= */
+@media (max-width: 768px) {
+
+    /* Ensure navbar height consistency */
+    .navbar {
+        height: 56px;                  /* standard app bar height */
+        align-items: center;
+    }
+
+    /* Uniform icon box for ALL icons */
+    .nav-links a,
+    .mode-toggle,
+    .profile-link {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;                    /* remove uneven padding */
+    }
+
+    /* Normalize icon sizes */
+    .nav-links a i,
+    .mode-toggle i,
+    .profile-link i {
+        font-size: 22px;
+        line-height: 1;
+    }
+
+    /* Profile image alignment */
+    .profile-link img {
+        width: 28px;
+        height: 28px;
+        display: block;
+    }
+}
+/* =========================================
+   DESKTOP / LAPTOP NAVBAR FIX
+========================================= */
+@media (min-width: 992px) {
+
+    /* Navbar height reset */
+    .navbar {
+        height: auto;
+        padding: 14px 36px;
+    }
+
+    /* Nav links container */
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        margin-left: auto;
+    }
+
+    /* Nav link (icon + text) */
+    .nav-links a {
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;
+        padding: 0;
+        background: none;
+        border-radius: 0;
+
+        display: flex;
+        align-items: center;
+        gap: 8px;              /* 🔥 proper icon-text gap */
+    }
+
+    /* Icon size alignment */
+    .nav-links a i {
+        font-size: 18px;
+        line-height: 1;
+        position: relative;
+        top: 1px;              /* 🔥 vertical alignment fix */
+    }
+
+    /* Dark mode icon */
+    .mode-toggle {
+        background: none;
+        width: auto;
+        height: auto;
+        padding: 0;
+        margin-left: 18px;
+    }
+
+    .mode-toggle i {
+        font-size: 20px;
+    }
+
+    /* Profile */
+    .profile-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+        background: none;
+        margin-left: 18px;
+    }
+
+    .profile-link img {
+        width: 36px;
+        height: 36px;
+        border: 2px solid #ffffff;
+    }
+
+    .profile-link i {
+        font-size: 32px;
+        background: none;
+        padding: 0;
+    }
+
+    .profile-link span {
+        display: inline;
+        font-size: 14px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+}
+
+/* ==================================================
+   RESPONSIVE ENHANCEMENTS
+================================================== */
+
+/* Feature cards grid responsive */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 12px 20px;
+    }
+    
+    .logo .h1logo {
+        font-size: 20px;
+        max-width: 180px;
+    }
+    
+    .feature-card {
+        padding: 22px 18px;
+    }
+    
+    .feature-card i {
+        font-size: 42px;
+    }
+    
+    .feature-card h2 {
+        font-size: 18px;
+    }
+}
+
+/* Small tablets - 768px */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+    
+    .logo .h1logo {
+        font-size: 16px;
+        max-width: 120px;
+    }
+    
+    .nav-links {
+        gap: 6px;
+    }
+    
+    .feature-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .feature-card {
+        padding: 20px 16px;
+    }
+    
+    .feature-card i {
+        font-size: 36px;
+    }
+    
+    .feature-card h2 {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    
+    .feature-card p {
+        font-size: 13px;
+    }
+    
+    .led-banner {
+        height: 32px;
+    }
+    
+    .led-text {
+        font-size: 13px;
+        line-height: 32px;
+    }
+    
+    .sidebar {
+        width: 200px;
+    }
+    
+    .sidebar a {
+        font-size: 14px;
+    }
+    
+    .footer {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+
+/* Mobile - 480px */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 8px 12px;
+        gap: 6px;
+    }
+    
+    .menu_icon i {
+        font-size: 22px;
+    }
+    
+    .logo .h1logo {
+        font-size: 14px;
+        max-width: 100px;
+    }
+    
+    .nav-links a i {
+        font-size: 18px;
+    }
+    
+    .mode-toggle i {
+        font-size: 18px;
+    }
+    
+    .profile-link img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .profile-link i {
+        font-size: 22px;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 12px;
+    }
+    
+    .feature-card {
+        padding: 18px 14px;
+    }
+    
+    .feature-card i {
+        font-size: 32px;
+    }
+    
+    .feature-card h2 {
+        font-size: 15px;
+        margin-top: 8px;
+    }
+    
+    .feature-card p {
+        font-size: 12px;
+    }
+    
+    .led-banner {
+        height: 28px;
+    }
+    
+    .led-text {
+        font-size: 11px;
+        line-height: 28px;
+    }
+    
+    .sidebar {
+        width: 180px;
+        padding: 16px;
+    }
+    
+    .sidebar ul {
+        margin-top: 60px;
+    }
+    
+    .sidebar li {
+        margin-bottom: 18px;
+    }
+    
+    .sidebar a {
+        font-size: 13px;
+    }
+    
+    .footer {
+        font-size: 11px;
+        padding: 8px;
+    }
+}
