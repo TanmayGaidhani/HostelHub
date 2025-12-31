@@ -38,8 +38,30 @@ import time
 from datetime import timedelta
 
 # Load config
-with open('config.json', 'r') as c:
-    params = json.load(c)["params"]
+import os
+
+# Try to load from environment variables first (for production)
+if os.environ.get('MONGO_URI'):
+    params = {
+        'mongo_uri': os.environ.get('MONGO_URI'),
+        'secret_key': os.environ.get('SECRET_KEY', 'fallback-secret-key'),
+        'gmail_user': os.environ.get('GMAIL_USER'),
+        'gmail_password': os.environ.get('GMAIL_PASSWORD'),
+        'razorpay_key_id': os.environ.get('RAZORPAY_KEY_ID'),
+        'razorpay_key_secret': os.environ.get('RAZORPAY_KEY_SECRET'),
+        'twilio_account_sid': os.environ.get('TWILIO_ACCOUNT_SID'),
+        'twilio_auth_token': os.environ.get('TWILIO_AUTH_TOKEN'),
+        'twilio_number': os.environ.get('TWILIO_NUMBER'),
+        'SECRET_KEY': os.environ.get('SECRET_KEY', 'fallback-secret-key'),
+        'SESSION_COOKIE_HTTPONLY': True,
+        'SESSION_COOKIE_SECURE': True,  # Enable for HTTPS
+        'SESSION_COOKIE_SAMESITE': 'Lax',
+        'SESSION_LIFETIME_MINUTES': 20
+    }
+else:
+    # Load from config.json for local development
+    with open('config.json', 'r') as c:
+        params = json.load(c)["params"]
 
 
 app = Flask(__name__)
@@ -1779,4 +1801,6 @@ def set_hostel_fee():
 
 #<---------------------------------------- Degugger ------------------------------------------------------------------->
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)

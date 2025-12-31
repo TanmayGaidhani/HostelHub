@@ -64,3 +64,6 @@ static/profile_pics/*
 
 # Temporary files
 tempCodeRunnerFile.py
+
+# Local development files
+.env.local
