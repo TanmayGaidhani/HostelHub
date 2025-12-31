@@ -40,28 +40,50 @@ from datetime import timedelta
 # Load config
 import os
 
-# Try to load from environment variables first (for production)
-if os.environ.get('MONGO_URI'):
+# Check if we're in production (Render sets this)
+is_production = os.environ.get('RENDER') or os.environ.get('MONGO_URI') or not os.path.exists('config.json')
+
+if is_production:
+    # Production environment - use environment variables
     params = {
-        'mongo_uri': os.environ.get('MONGO_URI'),
-        'secret_key': os.environ.get('SECRET_KEY', 'fallback-secret-key'),
-        'gmail_user': os.environ.get('GMAIL_USER'),
-        'gmail_password': os.environ.get('GMAIL_PASSWORD'),
-        'razorpay_key_id': os.environ.get('RAZORPAY_KEY_ID'),
-        'razorpay_key_secret': os.environ.get('RAZORPAY_KEY_SECRET'),
-        'twilio_account_sid': os.environ.get('TWILIO_ACCOUNT_SID'),
-        'twilio_auth_token': os.environ.get('TWILIO_AUTH_TOKEN'),
-        'twilio_number': os.environ.get('TWILIO_NUMBER'),
-        'SECRET_KEY': os.environ.get('SECRET_KEY', 'fallback-secret-key'),
+        'mongo_uri': os.environ.get('MONGO_URI', 'mongodb://localhost:27017/hostelhub'),
+        'secret_key': os.environ.get('SECRET_KEY', 'fallback-secret-key-change-in-production'),
+        'gmail_user': os.environ.get('GMAIL_USER', ''),
+        'gmail_password': os.environ.get('GMAIL_PASSWORD', ''),
+        'razorpay_key_id': os.environ.get('RAZORPAY_KEY_ID', ''),
+        'razorpay_key_secret': os.environ.get('RAZORPAY_KEY_SECRET', ''),
+        'twilio_account_sid': os.environ.get('TWILIO_ACCOUNT_SID', ''),
+        'twilio_auth_token': os.environ.get('TWILIO_AUTH_TOKEN', ''),
+        'twilio_number': os.environ.get('TWILIO_NUMBER', ''),
+        'SECRET_KEY': os.environ.get('SECRET_KEY', 'fallback-secret-key-change-in-production'),
         'SESSION_COOKIE_HTTPONLY': True,
         'SESSION_COOKIE_SECURE': True,  # Enable for HTTPS
         'SESSION_COOKIE_SAMESITE': 'Lax',
         'SESSION_LIFETIME_MINUTES': 20
     }
 else:
-    # Load from config.json for local development
-    with open('config.json', 'r') as c:
-        params = json.load(c)["params"]
+    # Local development - load from config.json
+    try:
+        with open('config.json', 'r') as c:
+            params = json.load(c)["params"]
+    except FileNotFoundError:
+        print("Warning: config.json not found. Using environment variables.")
+        params = {
+            'mongo_uri': os.environ.get('MONGO_URI', 'mongodb://localhost:27017/hostelhub'),
+            'secret_key': os.environ.get('SECRET_KEY', 'dev-secret-key'),
+            'gmail_user': os.environ.get('GMAIL_USER', ''),
+            'gmail_password': os.environ.get('GMAIL_PASSWORD', ''),
+            'razorpay_key_id': os.environ.get('RAZORPAY_KEY_ID', ''),
+            'razorpay_key_secret': os.environ.get('RAZORPAY_KEY_SECRET', ''),
+            'twilio_account_sid': os.environ.get('TWILIO_ACCOUNT_SID', ''),
+            'twilio_auth_token': os.environ.get('TWILIO_AUTH_TOKEN', ''),
+            'twilio_number': os.environ.get('TWILIO_NUMBER', ''),
+            'SECRET_KEY': os.environ.get('SECRET_KEY', 'dev-secret-key'),
+            'SESSION_COOKIE_HTTPONLY': True,
+            'SESSION_COOKIE_SECURE': False,  # Disable for local HTTP
+            'SESSION_COOKIE_SAMESITE': 'Lax',
+            'SESSION_LIFETIME_MINUTES': 20
+        }
 
 
 app = Flask(__name__)
