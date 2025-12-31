@@ -46,7 +46,7 @@ is_production = os.environ.get('RENDER') or os.environ.get('MONGO_URI') or not o
 if is_production:
     # Production environment - use environment variables
     params = {
-        'mongo_uri': os.environ.get('MONGO_URI', 'mongodb://localhost:27017/hostelhub'),
+        'mongo_uri': os.environ.get('MONGO_URI'),
         'secret_key': os.environ.get('SECRET_KEY', 'fallback-secret-key-change-in-production'),
         'gmail_user': os.environ.get('GMAIL_USER', ''),
         'gmail_password': os.environ.get('GMAIL_PASSWORD', ''),
@@ -69,7 +69,7 @@ else:
     except FileNotFoundError:
         print("Warning: config.json not found. Using environment variables.")
         params = {
-            'mongo_uri': os.environ.get('MONGO_URI', 'mongodb://localhost:27017/hostelhub'),
+            'mongo_uri': os.environ.get('MONGO_URI'),
             'secret_key': os.environ.get('SECRET_KEY', 'dev-secret-key'),
             'gmail_user': os.environ.get('GMAIL_USER', ''),
             'gmail_password': os.environ.get('GMAIL_PASSWORD', ''),
@@ -115,7 +115,11 @@ app.config.update(
 mail = Mail(app)
 
 # MongoDB setup
-app.config["MONGO_URI"] = params["mongo_uri"]
+mongo_uri = os.environ.get('MONGO_URI')
+if not mongo_uri:
+    raise ValueError("MONGO_URI environment variable is required for production deployment")
+
+app.config["MONGO_URI"] = mongo_uri
 mongo = PyMongo(app)
 attendance_col = mongo.db.attendance
 users_collection = mongo.db.users
