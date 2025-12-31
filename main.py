@@ -312,7 +312,19 @@ def notavl():
 # Students
 @app.route('/health')
 def health_check():
-    return jsonify({'status': 'healthy', 'timestamp': datetime.utcnow().isoformat()})
+    try:
+        # Test MongoDB connection
+        mongo.db.command('ping')
+        db_status = "connected"
+    except Exception as e:
+        db_status = f"error: {str(e)}"
+    
+    return jsonify({
+        'status': 'healthy', 
+        'timestamp': datetime.utcnow().isoformat(),
+        'database': db_status,
+        'mongo_uri_set': bool(os.environ.get('MONGO_URI'))
+    })
 
 @app.route("/")
 def home():
