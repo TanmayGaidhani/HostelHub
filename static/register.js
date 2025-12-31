@@ -1,20 +1,3 @@
-// OTP Input Handling
-const otpInputs = document.querySelectorAll('.otp-inputs input');
-otpInputs.forEach((input, index) => {
-    input.addEventListener('input', () => {
-        input.value = input.value.replace(/\D/g, '');
-        if (input.value.length === 1 && index < otpInputs.length - 1) {
-            otpInputs[index + 1].focus();
-        }
-    });
-
-    input.addEventListener('keydown', (e) => {
-        if (e.key === "Backspace" && input.value === "" && index > 0) {
-            otpInputs[index - 1].focus();
-        }
-    });
-});
-
 // Full Name (only letters)
 const nameInput = document.getElementById("name");
 const nameError = nameInput.nextElementSibling;
@@ -142,45 +125,3 @@ yearInput.addEventListener("input", function () {
         form.classList.add('was-validated');
     }, false);
 })();
-
-// Disable register button initially
-const registerBtn = document.getElementById('registerBtn');
-registerBtn.disabled = true;
-registerBtn.style.backgroundColor = '#aaa';
-
-// Send OTP
-document.getElementById('getOtpBtn').addEventListener('click', async () => {
-    const phone = document.getElementById('mobile').value;
-    const response = await fetch('/send-otp', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone })
-    });
-    const result = await response.json();
-    alert(result.message || result.error);
-});
-
-// Verify OTP
-document.getElementById('verifyOtpBtn').addEventListener('click', async () => {
-    const phone = document.getElementById('mobile').value;
-    const otp = Array.from(otpInputs).map(i => i.value).join('');
-
-    const response = await fetch('/verify-otp', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, otp })
-    });
-
-    const result = await response.json();
-
-    if (result.message === 'OTP verified successfully!') {
-        alert(result.message);
-        registerBtn.disabled = false;
-        registerBtn.style.backgroundColor = '#4CAF50';
-        registerBtn.style.color = 'white';
-    } else {
-        alert(result.error || 'OTP verification failed');
-        otpInputs.forEach(input => input.value = '');
-        otpInputs[0].focus();
-    }
-});

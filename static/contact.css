@@ -45,7 +45,6 @@ body {
     height: 72px;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     color: #ffffff;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -54,12 +53,13 @@ body {
     font-size: 22px;
     font-weight: 800;
 
-    position: fixed;
+
     top: 0;
     left: 0;
     z-index: 1000;
 
     box-shadow: var(--shadow-soft);
+    position: fixed;
 }
 
 /* BRAND */

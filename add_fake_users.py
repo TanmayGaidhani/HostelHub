@@ -8,8 +8,8 @@ fake = Faker('en_IN')
 Faker.seed(123)
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017/")
-db = client["messtrack"]
+client = MongoClient("mongodb+srv://tanmaygaidhani:Tanmay%40890@cluster0.xwnlb7q.mongodb.net/atls?appName=Cluster0")
+db = client["atls"]
 users = db["users"]
 
 # Branches, Years, Gender lists
@@ -55,4 +55,4 @@ for _ in range(500):
 
     users.insert_one(user)
 
-print("🎉 500 Indian Fake Students Inserted Successfully in messtrack.users")
+print("🎉 500 Indian Fake Students Inserted Successfully in atls.users (MongoDB Atlas)")

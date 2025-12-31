@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Mess Timetable</title>
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='design-system.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='admintimetable.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
@@ -36,7 +38,8 @@
                     <tr>
                         <td class="day">{{ item.day }}</td>
                         <td><input type="text" name="breakfast_{{ loop.index0 }}" value="{{ item.breakfast }}"></td>
-                        <td><input type="text" name="breakfast_time_{{ loop.index0 }}" value="{{ item.breakfast_time }}"></td>
+                        <td><input type="text" name="breakfast_time_{{ loop.index0 }}"
+                                value="{{ item.breakfast_time }}"></td>
                         <td><input type="text" name="lunch_{{ loop.index0 }}" value="{{ item.lunch }}"></td>
                         <td><input type="text" name="lunch_time_{{ loop.index0 }}" value="{{ item.lunch_time }}"></td>
                         <td><input type="text" name="dinner_{{ loop.index0 }}" value="{{ item.dinner }}"></td>
@@ -52,5 +55,10 @@
         </form>
     </div>
 
+    <footer class="footer-enhanced">
+        <p>© 2025 HostelHub • Designed by Tanmay and Nikhil</p>
+    </footer>
+
 </body>
+
 </html>

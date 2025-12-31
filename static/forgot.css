@@ -1,112 +1,87 @@
-.forgot-container {
-    width: 400px;
-    margin: 100px auto;
-    padding: 25px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f4f4f4;
+/* Additional styles for forgot password page */
+
+.password-strength {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
-input,
-button {
-    display: block;
-    width: 100%;
-    margin-top: 15px;
-    padding: 10px;
-    font-size: 16px;
+.strength-very-weak { color: #ef4444; }
+.strength-weak { color: #f97316; }
+.strength-fair { color: #eab308; }
+.strength-good { color: #22c55e; }
+.strength-strong { color: #16a34a; }
+
+.form-step {
+    animation: slideIn 0.3s ease;
 }
 
-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-button:hover {
-    background-color: #2ecc71;
+.step-indicator .step {
+    transition: all 0.3s ease;
 }
 
-
-.back-button {
+.step-indicator .step::after {
+    content: '';
     position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px 18px;
-    background-color: #007BFF;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    z-index: 1000;
+    top: 50%;
+    left: 100%;
+    width: 20px;
+    height: 2px;
+    background: #e5e7eb;
+    transform: translateY(-50%);
 }
 
-.back-button:hover {
-    background-color: #0056b3;
+.step-indicator .step:last-child::after {
+    display: none;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-/* Tablets - 1024px */
-@media (max-width: 1024px) {
-    .forgot-container {
-        width: 380px;
-        margin: 80px auto;
-    }
+.step-indicator .step.completed::after {
+    background: #10b981;
 }
 
-/* Small tablets - 768px */
-@media (max-width: 768px) {
-    .forgot-container {
-        width: 90%;
-        max-width: 400px;
-        margin: 60px auto;
-        padding: 22px;
-    }
-
-    input,
-    button {
-        padding: 12px;
-        font-size: 15px;
-    }
-
-    .back-button {
-        top: 16px;
-        right: 16px;
-        padding: 8px 14px;
-        font-size: 14px;
-    }
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
 }
 
-/* Mobile - 480px */
+.input-group input:focus + .input-label {
+    color: #2563eb;
+}
+
+.back-btn {
+    background: #6b7280 !important;
+    margin-top: 10px;
+}
+
+.back-btn:hover {
+    background: #4b5563 !important;
+}
+
+/* Responsive design */
 @media (max-width: 480px) {
     .forgot-container {
-        width: 94%;
-        margin: 80px auto 40px;
-        padding: 20px;
-        border-radius: 12px;
+        margin: 20px;
+        padding: 25px;
     }
-
-    input,
-    button {
-        padding: 12px;
-        font-size: 16px;
-        margin-top: 12px;
+    
+    .step-indicator {
+        margin-bottom: 20px;
     }
-
-    button {
-        border-radius: 8px;
-    }
-
-    .back-button {
-        top: 12px;
-        right: 12px;
-        padding: 6px 12px;
-        font-size: 13px;
-        border-radius: 6px;
+    
+    .step {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
     }
 }

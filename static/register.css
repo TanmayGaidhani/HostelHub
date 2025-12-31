@@ -48,6 +48,9 @@ body {
     background: linear-gradient(90deg, #2563eb, #3b82f6);
     color: #ffffff;
     box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .brand-navbar {

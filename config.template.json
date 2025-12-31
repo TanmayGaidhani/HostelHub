@@ -1,0 +1,19 @@
+{
+    "params": {
+        "local_server": "true",
+        "mongo_uri": "mongodb+srv://username:password@cluster0.xwnlb7q.mongodb.net/atls?appName=Cluster0",
+        "secret_key": "your-secret-key-here",
+        "gmail_user": "your-email@gmail.com",
+        "gmail_password": "your-app-password",
+        "razorpay_key_id": "your-razorpay-key-id",
+        "razorpay_key_secret": "your-razorpay-key-secret",
+        "twilio_account_sid": "your-twilio-account-sid",
+        "twilio_auth_token": "your-twilio-auth-token",
+        "twilio_number": "your-twilio-number",
+        "SECRET_KEY": "your-secret-key-here",
+        "SESSION_COOKIE_HTTPONLY": true,
+        "SESSION_COOKIE_SECURE": false,
+        "SESSION_COOKIE_SAMESITE": "Lax",
+        "SESSION_LIFETIME_MINUTES": 20
+    }
+}

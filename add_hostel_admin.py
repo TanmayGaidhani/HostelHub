@@ -1,8 +1,8 @@
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash
 
-client = MongoClient("mongodb://localhost:27017/")  
-db = client["messtrack"]
+client = MongoClient("mongodb+srv://tanmaygaidhani:Tanmay%40890@cluster0.xwnlb7q.mongodb.net/atls?appName=Cluster0")  
+db = client["atls"]
 xadmin_collection = db["xadminlogin"]
 
 email = "hosteladmin@hostelhub.ac.in"

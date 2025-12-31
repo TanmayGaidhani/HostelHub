@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Attendance Status - HostelHub</title>
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='design-system.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='adminattendance.css') }}">
 
     <!-- JS PDF -->
@@ -73,6 +74,10 @@
     {% endif %}
 
     <script src="{{ url_for('static', filename='adminattendance.js') }}"></script>
+
+    <footer class="footer-enhanced">
+        <p>© 2025 HostelHub • Designed by Tanmay and Nikhil</p>
+    </footer>
 
 </body>
 

@@ -8,6 +8,7 @@
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='design-system.css') }}" />
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
 
     <style>
@@ -24,8 +25,8 @@
             --text-muted: #475569;
             --radius-lg: 18px;
             --radius-md: 12px;
-            --shadow-soft: 0 6px 18px rgba(0,0,0,0.15);
-            --shadow-strong: 0 14px 35px rgba(37,99,235,0.35);
+            --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 14px 35px rgba(37, 99, 235, 0.35);
         }
 
         /* =========================
@@ -71,13 +72,13 @@
             font-weight: 700;
             font-size: 16px;
             text-decoration: none;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
             transition: all 0.25s ease;
         }
 
         .back-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
         }
 
         /* =========================
@@ -149,13 +150,13 @@
             border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 800;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
             transition: transform 0.15s ease, box-shadow 0.25s ease;
         }
 
         .open-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
         }
     </style>
 </head>
@@ -219,5 +220,10 @@
 
     </div>
 
+    <footer class="footer-enhanced">
+        <p>© 2025 HostelHub • Designed by Tanmay and Nikhil</p>
+    </footer>
+
 </body>
+
 </html>

@@ -457,64 +457,99 @@ otp_store = {}  # Temporary OTP store
 def forgot_password():
     return render_template('forgot_password.html')
 
-
-
-
-@app.route('/send-reset-otp', methods=['POST'])
-def send_reset_otp():
+@app.route('/find-account', methods=['POST'])
+def find_account():
     data = request.json
-    phone = data.get('phone')
-
-    user = mongo.db.users.find_one({'mobile_no': phone})
+    identifier = data.get('identifier', '').strip()
+    
+    if not identifier:
+        return jsonify({'error': 'Please provide username or email'}), 400
+    
+    # Search by username or email
+    user = mongo.db.users.find_one({
+        '$or': [
+            {'username': identifier},
+            {'email': identifier}
+        ]
+    })
+    
     if not user:
-        return jsonify({'error': 'Mobile number not found'}), 404
+        return jsonify({'error': 'No account found with this username or email'}), 404
+    
+    # For security, we'll use a simple security question based on user data
+    # In a real app, you'd store actual security questions
+    security_questions = [
+        f"What is your academic branch? (Hint: {user.get('academic_branch', 'N/A')})",
+        f"What is your mobile number? (Hint: {user.get('mobile_no', 'N/A')[-4:]})",
+        f"What is your academic year? (Hint: {user.get('academic_year', 'N/A')})"
+    ]
+    
+    # Use academic branch as the security question for simplicity
+    security_question = f"What is your academic branch?"
+    
+    return jsonify({
+        'user': {
+            '_id': str(user['_id']),
+            'username': user['username'],
+            'email': user['email']
+        },
+        'security_question': security_question
+    })
 
-    otp = ''.join([str(random.randint(0, 9)) for _ in range(6)])
-    otp_store[phone] = otp
-
+@app.route('/verify-security-answer', methods=['POST'])
+def verify_security_answer():
+    data = request.json
+    user_id = data.get('user_id')
+    answer = data.get('answer', '').strip().upper()
+    
+    if not user_id or not answer:
+        return jsonify({'error': 'Missing required information'}), 400
+    
     try:
-        client.messages.create(
-            body=f"Your HostelHub OTP is: {otp}",
-            from_=twilio_number,
-            to=f"+91{phone}"
-        )
-        return jsonify({'message': 'OTP sent successfully'})
+        user = mongo.db.users.find_one({'_id': ObjectId(user_id)})
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+        
+        # Check if answer matches academic branch (case insensitive)
+        correct_answer = user.get('academic_branch', '').upper()
+        
+        if answer == correct_answer:
+            return jsonify({'message': 'Security answer verified'})
+        else:
+            return jsonify({'error': 'Incorrect security answer'}), 400
+            
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Invalid user ID'}), 400
 
-
-@app.route('/verify-reset-otp', methods=['POST'])
-def verify_reset_otp():
+@app.route('/reset-password-final', methods=['POST'])
+def reset_password_final():
     data = request.json
-    phone = data.get('phone')
-    entered_otp = data.get('otp')
-
-    if phone not in otp_store:
-        return jsonify({'error': 'No OTP requested for this number'}), 400
-
-    if otp_store.get(phone) == entered_otp:
-        return jsonify({'message': 'OTP verified'})
-    else:
-        return jsonify({'error': 'Invalid OTP'}), 400
-
-
-@app.route('/reset-password', methods=['POST'])
-def reset_password():
-    data = request.json
-    phone = data.get('phone')
+    user_id = data.get('user_id')
     new_password = data.get('new_password')
-
-    if phone not in otp_store:
-        return jsonify({'error': 'OTP not verified yet'}), 400
-
-    hashed_pw = generate_password_hash(new_password, method='pbkdf2:sha256')
-    update_result = mongo.db.users.update_one({'mobile_no': phone}, {'$set': {'password': hashed_pw}})
-
-    if update_result.modified_count == 0:
-        return jsonify({'error': 'Password update failed. Please try again.'}), 500
-
-    otp_store.pop(phone, None)
-    return jsonify({'message': 'Password updated successfully'})
+    
+    if not user_id or not new_password:
+        return jsonify({'error': 'Missing required information'}), 400
+    
+    if len(new_password) < 8:
+        return jsonify({'error': 'Password must be at least 8 characters long'}), 400
+    
+    try:
+        # Hash the new password
+        hashed_password = generate_password_hash(new_password)
+        
+        # Update user password
+        result = mongo.db.users.update_one(
+            {'_id': ObjectId(user_id)},
+            {'$set': {'password': hashed_password}}
+        )
+        
+        if result.modified_count == 0:
+            return jsonify({'error': 'Failed to update password'}), 500
+        
+        return jsonify({'message': 'Password reset successfully'})
+        
+    except Exception as e:
+        return jsonify({'error': 'Invalid user ID or update failed'}), 400
 
 
 

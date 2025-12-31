@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notifications - HostelHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='design-system.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='notification.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
@@ -29,6 +30,10 @@
         <p class="empty">No notifications available yet.</p>
         {% endfor %}
     </div>
+
+    <footer class="footer-enhanced">
+        <p>© 2025 HostelHub • Designed by Tanmay and Nikhil</p>
+    </footer>
 
 </body>
 
