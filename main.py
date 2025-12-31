@@ -288,7 +288,12 @@ def notavl():
 
 #--------------------------------------------------------------------------------------------------#
 # Students
+@app.route('/health')
+def health_check():
+    return jsonify({'status': 'healthy', 'timestamp': datetime.utcnow().isoformat()})
+
 @app.route("/")
+def home():
 def home():
     latest_helpline = mongo.db.helpline.find_one(sort=[('_id', -1)])
     helpline = latest_helpline['number'] if latest_helpline else "Not Set"
