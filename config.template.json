@@ -1,7 +1,7 @@
 {
     "params": {
         "local_server": "true",
-        "mongo_uri": "mongodb+srv://username:password@cluster0.xwnlb7q.mongodb.net/atls?appName=Cluster0",
+        "mongo_uri": "mongodb+srv://tanmaygaidhani:Tanmay%40890@cluster0.xwnlb7q.mongodb.net/atls?appName=Cluster0",
         "secret_key": "your-secret-key-here",
         "gmail_user": "your-email@gmail.com",
         "gmail_password": "your-app-password",

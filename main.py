@@ -41,7 +41,7 @@ from datetime import timedelta
 import os
 
 # Check if we're in production (Render sets this)
-is_production = os.environ.get('RENDER') or os.environ.get('MONGO_URI') or not os.path.exists('config.json')
+is_production = os.environ.get('RENDER') or (os.environ.get('MONGO_URI') and not os.path.exists('config.json'))
 
 if is_production:
     # Production environment - use environment variables
@@ -115,11 +115,14 @@ app.config.update(
 mail = Mail(app)
 
 # MongoDB setup
-mongo_uri = os.environ.get('MONGO_URI')
-if not mongo_uri:
-    raise ValueError("MONGO_URI environment variable is required for production deployment")
+if is_production:
+    mongo_uri = os.environ.get('MONGO_URI')
+    if not mongo_uri:
+        raise ValueError("MONGO_URI environment variable is required for production deployment")
+    app.config["MONGO_URI"] = mongo_uri
+else:
+    app.config["MONGO_URI"] = params["mongo_uri"]
 
-app.config["MONGO_URI"] = mongo_uri
 mongo = PyMongo(app)
 attendance_col = mongo.db.attendance
 users_collection = mongo.db.users

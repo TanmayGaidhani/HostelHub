@@ -48,11 +48,11 @@
             <form method="POST" action="/xHostelLogin" autocomplete="off">
                 {{ csrf_token() if csrf_token is defined }}
 
-                <label for="email">Email</label>
+                <label for="email">Email(login id : messtrack@admin.com)</label>
                 <input type="text" id="email" name="email" placeholder="Enter Email" autocomplete="off"
                     autocapitalize="none" spellcheck="false" required>
 
-                <label for="password">Password</label>
+                <label for="password">Password(messtrackadmin)</label>
                 <input type="password" id="password" name="password" placeholder="Enter Password"
                     autocomplete="new-password" required>
 
