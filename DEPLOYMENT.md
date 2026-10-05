@@ -28,7 +28,7 @@
 In Render dashboard, go to Environment tab and add:
 
 ```
-MONGO_URI=mongodb+srv://username:password@cluster0.xwnlb7q.mongodb.net/atls?appName=Cluster0
+MONGO_URI=mongodb+srv://<username>:<password>@<your-cluster-name>.mongodb.net/atls?retryWrites=true&w=majority
 SECRET_KEY=your-secret-key-here
 GMAIL_USER=your-email@gmail.com
 GMAIL_PASSWORD=your-app-password

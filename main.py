@@ -1,5 +1,5 @@
 # type: ignore
-from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, send_file
+from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify, send_file, render_template_string
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField
@@ -115,18 +115,76 @@ app.config.update(
 mail = Mail(app)
 
 # MongoDB setup
+db_error = None
+mongo = None
+
 if is_production:
     mongo_uri = os.environ.get('MONGO_URI')
     if not mongo_uri:
-        raise ValueError("MONGO_URI environment variable is required for production deployment")
-    app.config["MONGO_URI"] = mongo_uri
+        db_error = "MONGO_URI environment variable is required for production deployment but was not set in Render."
+        print(f"⚠️ {db_error}")
+    else:
+        app.config["MONGO_URI"] = mongo_uri
 else:
-    app.config["MONGO_URI"] = params["mongo_uri"]
+    app.config["MONGO_URI"] = params.get("mongo_uri")
 
-mongo = PyMongo(app)
-attendance_col = mongo.db.attendance
-users_collection = mongo.db.users
-attendance_collection = mongo.db.attendance
+class SafeCollectionProxy:
+    """Safe proxy for collection objects."""
+    def __init__(self, name):
+        self._name = name
+
+    def __getattr__(self, item):
+        global mongo, db_error
+        if mongo and not isinstance(mongo, SafeMongoProxy) and hasattr(mongo, 'db') and mongo.db is not None:
+            col = getattr(mongo.db, self._name)
+            return getattr(col, item)
+        raise RuntimeError(f"Database not connected. Cannot access collection '{self._name}': {db_error or 'MongoDB is unreachable'}")
+
+class SafeDBProxy:
+    """Safe proxy for mongo.db to avoid crashing application during import/startup if DB is offline."""
+    def __getattr__(self, name):
+        global mongo
+        if mongo and not isinstance(mongo, SafeMongoProxy) and hasattr(mongo, 'db') and mongo.db is not None:
+            return getattr(mongo.db, name)
+        return SafeCollectionProxy(name)
+
+class SafeMongoProxy:
+    """Safe placeholder for mongo if initialization fails."""
+    def __init__(self):
+        self.db = SafeDBProxy()
+
+def init_mongo_connection():
+    global mongo, db_error
+    uri = app.config.get("MONGO_URI")
+    if not uri:
+        db_error = "MongoDB connection URI (MONGO_URI) is not configured."
+        mongo = SafeMongoProxy()
+        return False
+    try:
+        new_mongo = PyMongo(app)
+        # Test connection with a ping
+        new_mongo.db.command('ping')
+        mongo = new_mongo
+        db_error = None
+        print("✅ MongoDB Atlas connected successfully!")
+        return True
+    except Exception as e:
+        db_error = str(e)
+        mongo = SafeMongoProxy()
+        print("\n" + "="*60)
+        print("⚠️  DATABASE CONNECTION WARNING ⚠️")
+        print(f"Could not connect to MongoDB: {e}")
+        print("Web server will start, but database operations require a working MONGO_URI.")
+        print("Please check your MONGO_URI in Render's Environment settings.")
+        print("="*60 + "\n")
+        return False
+
+# Attempt initial connection
+init_mongo_connection()
+
+attendance_col = SafeCollectionProxy("attendance")
+users_collection = SafeCollectionProxy("users")
+attendance_collection = SafeCollectionProxy("attendance")
 
 
 # Media upload folder
@@ -142,8 +200,13 @@ login_manager.login_view = 'login'
 # User loader
 @login_manager.user_loader
 def load_user(user_id):
-    user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
-    return User(user) if user else None
+    if not mongo or not hasattr(mongo, 'db') or mongo.db is None or db_error:
+        return None
+    try:
+        user = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+        return User(user) if user else None
+    except Exception:
+        return None
 
 
 # Flask-Login User class
@@ -241,7 +304,8 @@ def session_timeout_check():
         'send-reset-otp',
         'verify-reset-otp',
         'reset-password',
-        'adminsetbill'
+        'adminsetbill',
+        'health_check'
     ]
 
     # Allow non-protected routes
@@ -316,22 +380,97 @@ def notavl():
 
 
 #--------------------------------------------------------------------------------------------------#
+# Database Connection Checker & Auto-Reconnect
+@app.before_request
+def check_db_status():
+    global db_error
+    if db_error or mongo is None or isinstance(mongo, SafeMongoProxy):
+        # Attempt reconnection in case database has resumed or DNS has resolved
+        if init_mongo_connection():
+            return None
+        # Allow health check and static files through
+        if request.endpoint in ['static', 'health_check']:
+            return None
+        return render_template_string("""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Database Connection Issue - HostelHub</title>
+            <style>
+                body {
+                    margin: 0; padding: 24px;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                    background: #0b0f19; color: #f1f5f9;
+                    display: flex; align-items: center; justify-content: center; min-height: 100vh;
+                }
+                .container {
+                    background: #151d2e; border: 1px solid #1e293b;
+                    border-radius: 16px; padding: 36px; max-width: 640px; width: 100%;
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                }
+                .badge {
+                    display: inline-block; background: rgba(239, 68, 68, 0.15); color: #f87171;
+                    padding: 4px 12px; border-radius: 9999px; font-size: 13px; font-weight: 600;
+                    margin-bottom: 16px; border: 1px solid rgba(239, 68, 68, 0.3);
+                }
+                h1 { margin: 0 0 12px 0; font-size: 24px; color: #ffffff; }
+                p { color: #94a3b8; line-height: 1.6; margin: 0 0 20px 0; font-size: 15px; }
+                .error-box {
+                    background: #080c14; border: 1px solid #2d3748;
+                    border-radius: 8px; padding: 14px 16px; font-family: monospace;
+                    font-size: 13px; color: #fbbf24; word-break: break-all; margin-bottom: 24px;
+                }
+                .steps { background: #0f172a; border-radius: 10px; padding: 18px 22px; border: 1px solid #1e293b; }
+                .steps h3 { margin: 0 0 12px 0; font-size: 15px; color: #e2e8f0; }
+                .steps ol { margin: 0; padding-left: 20px; color: #94a3b8; }
+                .steps li { margin-bottom: 10px; font-size: 14px; line-height: 1.5; }
+                .steps a { color: #38bdf8; text-decoration: none; }
+                .steps a:hover { text-decoration: underline; }
+                .footer { margin-top: 24px; text-align: center; font-size: 13px; color: #64748b; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="badge">MongoDB Connection Notice</div>
+                <h1>MongoDB Atlas Not Connected</h1>
+                <p>The HostelHub web service is running, but cannot connect to your MongoDB database using the configured connection string.</p>
+                <div class="error-box">{{ error }}</div>
+                <div class="steps">
+                    <h3>How to resolve this in Render &amp; Atlas:</h3>
+                    <ol>
+                        <li>Log in to <a href="https://cloud.mongodb.com" target="_blank">MongoDB Atlas</a> and ensure your cluster is <b>Active</b> (if <i>Paused</i>, click <b>Resume</b>).</li>
+                        <li>Under <b>Network Access</b>, verify that <code>0.0.0.0/0</code> (Allow Access from Anywhere) is added.</li>
+                        <li>Click <b>Connect &rarr; Drivers &rarr; Python</b> and copy the connection string.</li>
+                        <li>In your <a href="https://dashboard.render.com" target="_blank">Render Dashboard</a>, navigate to your <b>hostelhub</b> service &rarr; <b>Environment</b>.</li>
+                        <li>Set <code>MONGO_URI</code> to your valid connection string and save changes.</li>
+                    </ol>
+                </div>
+                <div class="footer">HostelHub Diagnostics &bull; Refresh page once updated</div>
+            </div>
+        </body>
+        </html>
+        """, error=db_error), 503
+
 # Students
 @app.route('/health')
 def health_check():
-    try:
-        # Test MongoDB connection
-        mongo.db.command('ping')
-        db_status = "connected"
-    except Exception as e:
-        db_status = f"error: {str(e)}"
+    db_status = "connected"
+    if db_error:
+        db_status = f"error: {db_error}"
+    else:
+        try:
+            mongo.db.command('ping')
+        except Exception as e:
+            db_status = f"error: {str(e)}"
     
     return jsonify({
-        'status': 'healthy', 
+        'status': 'healthy' if 'error' not in db_status else 'degraded', 
         'timestamp': datetime.utcnow().isoformat(),
         'database': db_status,
         'mongo_uri_set': bool(os.environ.get('MONGO_URI'))
-    })
+    }), 200
 
 @app.route("/")
 def home():
