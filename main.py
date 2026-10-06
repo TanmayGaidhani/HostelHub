@@ -9,6 +9,7 @@ import time
 from datetime import datetime, timedelta
 from bson import ObjectId
 import requests
+import threading
 import random
 from datetime import datetime
 from flask import request, jsonify
@@ -471,6 +472,39 @@ def health_check():
         'database': db_status,
         'mongo_uri_set': bool(os.environ.get('MONGO_URI'))
     }), 200
+
+# --------------------------------------------------------------------------------------------------#
+# Render Keep-Alive Background Service
+# Automatically pings the public health endpoint every 10 minutes to prevent the free tier
+# instance from spinning down after 15 minutes of inactivity.
+def _start_keep_alive():
+    app_url = (
+        os.environ.get('KEEP_ALIVE_URL')
+        or os.environ.get('RENDER_EXTERNAL_URL')
+        or ('https://hostelhub.onrender.com' if os.environ.get('RENDER') else None)
+    )
+    if not app_url:
+        return
+
+    health_url = f"{app_url.rstrip('/')}/health"
+
+    def ping_worker():
+        # Delay initial ping so server has completely started and bound to port
+        time.sleep(60)
+        print(f"💓 [Keep-Alive] Background worker active. Pinging {health_url} every 10 minutes.")
+        while True:
+            try:
+                resp = requests.get(health_url, timeout=15)
+                print(f"💓 [Keep-Alive] Ping sent to {health_url} -> HTTP {resp.status_code}")
+            except Exception as err:
+                print(f"⚠️ [Keep-Alive] Ping request warning: {err}")
+            time.sleep(600)  # Ping every 10 minutes
+
+    thread = threading.Thread(target=ping_worker, daemon=True, name="RenderKeepAlive")
+    thread.start()
+
+if os.environ.get('RENDER') or os.environ.get('KEEP_ALIVE_URL'):
+    _start_keep_alive()
 
 @app.route("/")
 def home():

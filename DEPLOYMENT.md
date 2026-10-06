@@ -94,10 +94,14 @@ To update your deployed app:
 2. Render will automatically redeploy
 3. Or manually trigger deployment in dashboard
 
-### 💰 Pricing
-
-- **Free Tier**: 750 hours/month, sleeps after 15 minutes of inactivity
-- **Paid Plans**: Starting at $7/month for always-on service
+### 💰 Pricing & 24/7 Keep-Alive
+ 
+- **Free Tier**: 750 hours/month, normally sleeps after 15 minutes of inactivity.
+- **Always-On / Keep Alive**:
+  - **In-App Self Pinger**: `main.py` automatically pings your app's `/health` endpoint every 10 minutes when running on Render.
+  - **GitHub Actions Workflow**: `.github/workflows/keep_alive.yml` automatically triggers every 10 minutes to prevent sleeping.
+  - **External Monitor (Optional)**: Set up a free monitor on [UptimeRobot](https://uptimerobot.com) to ping `https://<your-app>.onrender.com/health` every 5-10 minutes.
+- **Paid Plans**: Starting at $7/month for guaranteed dedicated resources without sleep constraints.
 
 ### 🎯 Post-Deployment Tasks
 

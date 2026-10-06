@@ -1,0 +1,20 @@
+name: Keep Render Service Awake
+
+on:
+  schedule:
+    # Runs every 10 minutes (Render sleeps after 15 minutes of inactivity)
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    name: Keep-Alive Ping
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Health Check
+        run: |
+          URL="${{ secrets.RENDER_APP_URL || 'https://hostelhub.onrender.com' }}"
+          TARGET="${URL%/}/health"
+          echo "Pinging ${TARGET} ..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -m 30 "${TARGET}" || echo "failed")
+          echo "Keep-alive ping completed with status: ${HTTP_STATUS}"
